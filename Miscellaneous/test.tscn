@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://c76veov770kai"]
+
+[ext_resource type="Texture2D" uid="uid://cja3xq153gqft" path="res://Entities/Player/character_design1.png" id="1_cxjfg"]
+[ext_resource type="PackedScene" uid="uid://buoaj3iht7eq3" path="res://Miscellaneous/Crt_shader_structure/crt_shader_structure.tscn" id="2_p4haf"]
+
+[node name="CharacterDesign1" type="Sprite2D"]
+texture_filter = 1
+position = Vector2(154, 92)
+texture = ExtResource("1_cxjfg")
+
+[node name="crt_shader_structure" parent="." instance=ExtResource("2_p4haf")]
