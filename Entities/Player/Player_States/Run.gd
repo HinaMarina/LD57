@@ -9,6 +9,7 @@ func do():
 	
 func physics_do(delta):
 	super(delta)
+	input_vector.x = Input.get_axis("ui_left","ui_right")
 	body.velocity = body.velocity.move_toward(Vector2(input_vector.x,0)*max_speed,acceleration)
 	body.move_and_slide()
 

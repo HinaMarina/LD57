@@ -12,8 +12,7 @@ func _on_body_entered(body: Node2D) -> void:
 		queue_free()
 
 func shoot(direction:Vector2):
-	print(direction)
 	var tween = create_tween()
-	tween.tween_property(self,'global_position',global_position+60*direction,0.5)
+	tween.tween_property(self,'global_position',global_position+80*direction,0.3)
 	await tween.finished
 	queue_free()

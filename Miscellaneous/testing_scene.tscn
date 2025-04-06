@@ -1,13 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8aqi4pkos1pp"]
+[gd_scene load_steps=6 format=3 uid="uid://b8aqi4pkos1pp"]
 
 [ext_resource type="Texture2D" uid="uid://crijlj0bcsvg8" path="res://icon.svg" id="1_cac6c"]
 [ext_resource type="PackedScene" uid="uid://bsoefkhx81bfe" path="res://Entities/Player/player.tscn" id="2_ow0ie"]
 [ext_resource type="PackedScene" uid="uid://cmvb6cmxwpt6k" path="res://Entities/Player/girl.tscn" id="3_dbvq4"]
+[ext_resource type="Script" uid="uid://gjpo8skln1qr" path="res://Miscellaneous/damage_test.gd" id="4_2o1wn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow0ie"]
 size = Vector2(138.7, 128)
 
 [node name="TESTING SCENE" type="Node2D"]
+
+[node name="Icon2" type="Sprite2D" parent="."]
+position = Vector2(342, 271)
+rotation = 0.767874
+texture = ExtResource("1_cac6c")
+script = ExtResource("4_2o1wn")
+
+[node name="Area2D" type="Area2D" parent="Icon2"]
+priority = 3
+
+[node name="Polygon2D" type="CollisionPolygon2D" parent="Icon2/Area2D"]
+polygon = PackedVector2Array(-67.0293, -49.2654, -62.9855, -37.8791, -38.5015, -62.1904, -49.7639, -65.936)
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(226, 227)
@@ -25,3 +38,5 @@ position = Vector2(465, 200)
 
 [node name="Player" parent="." instance=ExtResource("2_ow0ie")]
 position = Vector2(189, 131)
+
+[connection signal="body_entered" from="Icon2/Area2D" to="Icon2" method="_on_area_2d_body_entered"]

@@ -13,7 +13,7 @@ func get_gravity():
 	
 func jump():
 	body.velocity.y = jump_velocity
-	print(	body.velocity.y, body.global_position)	
+
 func do():
 	super()
 	play_animation()

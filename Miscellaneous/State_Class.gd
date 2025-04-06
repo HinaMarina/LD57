@@ -5,6 +5,7 @@ class_name State extends Node2D
 #@export var State_Machine:State_Machine
 @export var body:CharacterBody2D
 @export var player_gaze:RayCast2D
+@export var Camera:Camera2D
 
 
 @onready var state_sprite:Sprite2D
@@ -29,14 +30,16 @@ var is_holding_girl:=false:
 		if new_value != is_holding_girl:
 			is_holding_girl = new_value
 			for child in all_children_states:
-				child.is_holding_girl = new_value
+				if child != null:
+					child.is_holding_girl = new_value
 
 var can_player_move:bool = true:
 	set(new_value):
 		if new_value != can_player_move:
 			can_player_move = new_value
 			for child in all_children_states:
-				child.can_player_move = new_value
+				if child != null:
+					child.can_player_move = new_value
 				
 var input_vector:Vector2
 
@@ -45,7 +48,8 @@ func set_input_vector(new_value:Vector2):
 	if input_vector != new_value:
 		input_vector = new_value
 		for state in all_children_states:
-			state.set_input_vector(input_vector)
+			if state != null:
+				state.set_input_vector(input_vector)
 			
 
 func _ready() -> void:
@@ -136,6 +140,8 @@ func on_animation_started(anim_name:StringName):
 	
 	var node = body.get_node(path)
 	for each in all_children_states:
+		if !is_instance_valid(each):
+			continue
 		if each.state_sprite == null:
 			continue
 		if each.state_sprite != node:

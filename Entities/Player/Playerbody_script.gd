@@ -20,3 +20,6 @@ func leave_girl():
 	girl.global_position = self.global_position - _Machine.input_vector*15
 
 	_Machine.is_holding_girl = false
+
+func take_damage():
+	_Machine.take_damage()
