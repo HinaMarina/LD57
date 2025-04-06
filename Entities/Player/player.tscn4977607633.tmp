@@ -388,6 +388,35 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_vskfa"]
+resource_name = "Spiritual_Shot_W"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("State_Machine/Shoot_State/Sprite2D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("State_Machine/Shoot_State/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 2, 2, 3, 4]
+}
+
 [sub_resource type="Animation" id="Animation_xr8lj"]
 resource_name = "Walking_E"
 length = 0.9
@@ -734,49 +763,6 @@ tracks/1/keys = {
 "values": [1]
 }
 
-[sub_resource type="Animation" id="Animation_u86q5"]
-resource_name = "Spiritual_Shot_W"
-length = 0.7
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("State_Machine/Shoot_State/Sprite2D:flip_h")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("State_Machine/Shoot_State/Sprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 2, 2, 3, 4]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("State_Machine/Shoot_State")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"shoot"
-}]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_01a4e"]
 _data = {
 &"Idle_Standard_E": SubResource("Animation_x1y6q"),
@@ -797,7 +783,7 @@ _data = {
 &"Run_Standard_E": SubResource("Animation_lub02"),
 &"Run_Standard_W": SubResource("Animation_4wf4l"),
 &"Spiritual_Shot_E": SubResource("Animation_nhbkt"),
-&"Spiritual_Shot_W": SubResource("Animation_u86q5"),
+&"Spiritual_Shot_W": SubResource("Animation_vskfa"),
 &"Walking_E": SubResource("Animation_xr8lj"),
 &"Walking_W": SubResource("Animation_r8fok")
 }

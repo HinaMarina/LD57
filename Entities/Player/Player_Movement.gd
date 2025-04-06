@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+
 var max_speed :int = 100
 var acceleration:int = 75
 var input_vector:=Vector2.ZERO

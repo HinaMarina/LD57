@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://blwh4iw13om11"]
+
+[ext_resource type="Script" uid="uid://cce1atkxoe0fi" path="res://Entities/Player/spiritual_shot.gd" id="1_avfmd"]
+[ext_resource type="Texture2D" uid="uid://cqbkjg2wp1af6" path="res://Entities/Player/Sprites/shot_sprite.png" id="1_ufr2y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avfmd"]
+atlas = ExtResource("1_ufr2y")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fj0o"]
+atlas = ExtResource("1_ufr2y")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvpw5"]
+atlas = ExtResource("1_ufr2y")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5nft3"]
+atlas = ExtResource("1_ufr2y")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_donnk"]
+atlas = ExtResource("1_ufr2y")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3db2"]
+atlas = ExtResource("1_ufr2y")
+region = Rect2(100, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cbr1e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avfmd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fj0o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvpw5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5nft3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_donnk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3db2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ufr2y"]
+radius = 2.0
+
+[node name="Spritual_shot" type="Area2D"]
+script = ExtResource("1_avfmd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cbr1e")
+autoplay = "default"
+frame_progress = 0.550292
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ufr2y")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

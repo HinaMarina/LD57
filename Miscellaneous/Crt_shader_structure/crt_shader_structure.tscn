@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hj1c0"]
 shader = ExtResource("1_65p5r")
 shader_parameter/chromatic_aberration_ratio = 1.0
-shader_parameter/chromatic_aberration = false
+shader_parameter/chromatic_aberration = true
 shader_parameter/enable_grain = false
 shader_parameter/rgb_grid = true
 shader_parameter/vignette = true
