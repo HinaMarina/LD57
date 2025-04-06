@@ -57,6 +57,8 @@ animations = [{
 radius = 2.0
 
 [node name="Spritual_shot" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_avfmd")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

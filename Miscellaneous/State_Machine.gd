@@ -44,7 +44,7 @@ func select_state():
 			set_state(Walking_State)
 		else:
 			set_state(Run_State)
-	if Input.is_action_just_pressed("ui_accept") && can_player_move && grounded:
+	if Input.is_action_just_pressed("Jump") && can_player_move && grounded:
 		if is_holding_girl:
 			set_state(Jump_withgirl_State)
 		else:

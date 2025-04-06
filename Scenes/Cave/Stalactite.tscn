@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cil3pibh82g2d"]
+
+[ext_resource type="Script" uid="uid://bomsye4hbysla" path="res://Scenes/Cave/stalactite.gd" id="1_0h4ft"]
+[ext_resource type="Texture2D" uid="uid://c2osgxtgy73dh" path="res://Scenes/Cave/Visuals/stalactite.png" id="1_cfvvx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5owqt"]
+size = Vector2(15, 5)
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 7
+collision_mask = 7
+priority = 3
+script = ExtResource("1_0h4ft")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_cfvvx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -2.5)
+shape = SubResource("RectangleShape2D_5owqt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

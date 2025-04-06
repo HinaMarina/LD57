@@ -8,6 +8,8 @@ extends State
 @onready var jump_gravity:float = (-1)*(-2*jump_height)/(peak_time*peak_time)
 @onready var fall_gravity:float = (-1)*(-2*jump_height)/(fall_time*fall_time)
 
+var coyote_time:float = 0.05
+
 func get_gravity():
 	return jump_gravity if body.velocity.y<0 else fall_gravity
 	
@@ -16,6 +18,8 @@ func jump():
 
 func do():
 	super()
+	if lambda_time() <= coyote_time && Input.is_action_just_pressed("Jump"):
+		jump()
 	play_animation()
 	
 func physics_do(delta):

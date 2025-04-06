@@ -1,0 +1,209 @@
+[gd_scene load_steps=11 format=3 uid="uid://cth0ichxdo0xi"]
+
+[ext_resource type="Script" uid="uid://q6j60qvi7hdt" path="res://Entities/Brown_Nightmare/brown_nightmare.gd" id="1_3h056"]
+[ext_resource type="Texture2D" uid="uid://dkqf6rg6lvu0q" path="res://Entities/Brown_Nightmare/Brown_Nightmare.png" id="1_a7jhl"]
+[ext_resource type="Script" uid="uid://d2y3or8txgco1" path="res://Entities/Brown_Nightmare/Brown_Nightmare_body.gd" id="2_ewg4e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7jhl"]
+
+[sub_resource type="Animation" id="Animation_a7jhl"]
+resource_name = "Patrol_E"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_3h056"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ewg4e"]
+resource_name = "Patrol_W"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_arelx"]
+resource_name = "IDLE_E"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_q528r"]
+resource_name = "IDLE_W"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:flip_h")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_arelx"]
+_data = {
+&"IDLE_E": SubResource("Animation_arelx"),
+&"IDLE_W": SubResource("Animation_q528r"),
+&"Patrol_E": SubResource("Animation_a7jhl"),
+&"Patrol_W": SubResource("Animation_ewg4e"),
+&"RESET": SubResource("Animation_3h056")
+}
+
+[node name="Brown_Nightmare" type="Node2D" node_paths=PackedStringArray("body", "left_limit", "right_limit", "animator", "timer")]
+script = ExtResource("1_3h056")
+body = NodePath("CharacterBody2D")
+left_limit = NodePath("Left_limit")
+right_limit = NodePath("Right_limit")
+animator = NodePath("AnimationPlayer")
+timer = NodePath("Timer")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("2_ewg4e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_a7jhl")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(0, -14)
+texture = ExtResource("1_a7jhl")
+hframes = 4
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_a7jhl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_arelx")
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="Left_limit" type="Node2D" parent="."]
+position = Vector2(-32, 0)
+
+[node name="Right_limit" type="Node2D" parent="."]
+position = Vector2(32, 0)
+
+[connection signal="body_entered" from="CharacterBody2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

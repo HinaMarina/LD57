@@ -8,7 +8,6 @@ func _ready() -> void:
 	
 func shoot():
 	shot_spot.global_position.x = body.global_position.x + input_vector.x*20
-
 	var spiritual_shot = spiritual_shot_scene.instantiate()
 	var parent = body.get_parent().get_parent()
 	parent.add_child(spiritual_shot)
@@ -20,6 +19,11 @@ func do():
 		animation_player.play("Spiritual_Shot_E")
 	else:
 		animation_player.play("Spiritual_Shot_W")
+
+func physics_do(delta):
+	if grounded || body.velocity.y>=0:
+		body.velocity = body.velocity/2
+		body.move_and_slide()
 		
 func on_animation_finished(anim_name):
 	var parent = get_parent() as State_Machine

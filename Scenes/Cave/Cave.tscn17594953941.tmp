@@ -1,0 +1,222 @@
+[gd_scene load_steps=21 format=4 uid="uid://bvt8aanp6w36g"]
+
+[ext_resource type="Texture2D" uid="uid://blln8st5d2564" path="res://Scenes/Cave/Visuals/Basic_Cave_Tileset.png" id="1_v44i0"]
+[ext_resource type="PackedScene" uid="uid://bsoefkhx81bfe" path="res://Entities/Player/player.tscn" id="2_1eh64"]
+[ext_resource type="PackedScene" uid="uid://cmvb6cmxwpt6k" path="res://Entities/Player/girl.tscn" id="2_lgr5o"]
+[ext_resource type="Script" uid="uid://ce8ikamhno8h3" path="res://Scenes/Cave/moving_platform.gd" id="4_nhi4o"]
+[ext_resource type="Texture2D" uid="uid://bwipqvsqynknx" path="res://Scenes/Cave/Visuals/cave_moving_platform.png" id="5_evfyq"]
+[ext_resource type="PackedScene" uid="uid://cil3pibh82g2d" path="res://Scenes/Cave/Stalactite.tscn" id="6_evfyq"]
+[ext_resource type="PackedScene" uid="uid://hul6vibo08pe" path="res://Scenes/Cave/Vines.tscn" id="7_frjtu"]
+[ext_resource type="PackedScene" uid="uid://cth0ichxdo0xi" path="res://Entities/Brown_Nightmare/brown_nightmare.tscn" id="8_wpk3t"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1eh64"]
+texture = ExtResource("1_v44i0")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_lgr5o"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_1eh64")
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_1eh64"]
+a = Vector2(83, 9)
+b = Vector2(-60, 9)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_lgr5o"]
+a = Vector2(-115, -1)
+b = Vector2(90, -1)
+
+[sub_resource type="Curve2D" id="Curve2D_nhi4o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -64, 32, 0, 0, 0, 0, -64, -64)
+}
+point_count = 2
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6jdt2"]
+a = Vector2(0, 1)
+b = Vector2(32, 1)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6jdt2"]
+texture = ExtResource("5_evfyq")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_k8a14"]
+sources/0 = SubResource("TileSetAtlasSource_6jdt2")
+
+[sub_resource type="Animation" id="Animation_6jdt2"]
+resource_name = "path"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-1.7, -1.7),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_k8a14"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uspge"]
+_data = {
+&"RESET": SubResource("Animation_k8a14"),
+&"path": SubResource("Animation_6jdt2")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_evfyq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -64, 32, 0, 0, 0, 0, 40, 32)
+}
+point_count = 2
+
+[node name="Cave" type="Node2D"]
+
+[node name="Girl" parent="." instance=ExtResource("2_lgr5o")]
+position = Vector2(177, -96)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = -3
+position = Vector2(-8, 16)
+tile_map_data = PackedByteArray("AAAFAPr/AAAAAAAAAAAFAPv/AAAAAAEAAAAGAPr/AAABAAAAAAAHAPr/AAABAAAAAAAIAPr/AAABAAAAAAAJAPr/AAABAAAAAAAKAPr/AAABAAAAAAALAPr/AAABAAAAAAAMAPr/AAABAAAAAAANAPr/AAACAAAAAAANAPv/AAACAAEAAAALAPv/AAABAAEAAAAKAPv/AAABAAEAAAAJAPv/AAABAAEAAAAIAPv/AAABAAEAAAAHAPv/AAABAAEAAAAGAPv/AAABAAEAAAAMAPv/AAABAAEAAAA=")
+tile_set = SubResource("TileSet_lgr5o")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TileMapLayer"]
+collision_layer = 35
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/StaticBody2D"]
+position = Vector2(141, -104)
+shape = SubResource("SegmentShape2D_1eh64")
+one_way_collision = true
+
+[node name="TileMapLayer3" type="TileMapLayer" parent="."]
+z_index = -2
+tile_map_data = PackedByteArray("AAACAP3/AAABAAAAAAADAP3/AAABAAAAAAAEAP3/AAABAAAAAAAFAP3/AAABAAAAAAAGAP3/AAABAAAAAAAHAP3/AAABAAAAAAAIAP3/AAABAAAAAAAJAP3/AAABAAAAAAAKAP3/AAABAAAAAAALAP3/AAABAAAAAAAMAP3/AAABAAAAAAABAP3/AAAAAAAAAAANAP3/AAACAAAAAAABAP7/AAAAAAEAAAABAP//AAAAAAEAAAANAP7/AAACAAEAAAANAP//AAACAAEAAAACAP7/AAABAAEAAAACAP//AAABAAEAAAADAP7/AAABAAEAAAADAP//AAABAAEAAAAEAP7/AAABAAEAAAAEAP//AAABAAEAAAAFAP7/AAABAAEAAAAFAP//AAABAAEAAAAGAP7/AAABAAEAAAAGAP//AAABAAEAAAAHAP7/AAABAAEAAAAHAP//AAABAAEAAAAIAP7/AAABAAEAAAAIAP//AAABAAEAAAAJAP7/AAABAAEAAAAJAP//AAABAAEAAAAKAP7/AAABAAEAAAAKAP//AAABAAEAAAALAP7/AAABAAEAAAALAP//AAABAAEAAAAMAP7/AAABAAEAAAAMAP//AAABAAEAAAA=")
+tile_set = SubResource("TileSet_lgr5o")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TileMapLayer3"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer3/StaticBody2D"]
+position = Vector2(133, -46)
+shape = SubResource("SegmentShape2D_lgr5o")
+one_way_collision = true
+
+[node name="Player" parent="." instance=ExtResource("2_1eh64")]
+position = Vector2(119, -121)
+
+[node name="Node2D" type="Node2D" parent="." node_paths=PackedStringArray("animator")]
+position = Vector2(320, -64)
+script = ExtResource("4_nhi4o")
+animator = NodePath("AnimationPlayer")
+
+[node name="Moving_Platform" type="Node2D" parent="Node2D"]
+
+[node name="Timer" type="Timer" parent="Node2D/Moving_Platform"]
+one_shot = true
+
+[node name="Path2D" type="Path2D" parent="Node2D"]
+curve = SubResource("Curve2D_nhi4o")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Node2D/Path2D"]
+position = Vector2(-64, 32)
+rotation = -1.5708
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Node2D/Path2D/PathFollow2D"]
+remote_path = NodePath("../../../animatable_body")
+update_rotation = false
+
+[node name="animatable_body" type="AnimatableBody2D" parent="Node2D"]
+position = Vector2(-64, 32)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/animatable_body"]
+position = Vector2(-16, 0)
+shape = SubResource("SegmentShape2D_6jdt2")
+one_way_collision = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Node2D/animatable_body"]
+position = Vector2(-16, 0)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAACAAAAAAA=")
+tile_set = SubResource("TileSet_k8a14")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_uspge")
+}
+
+[node name="Node2D2" type="Node2D" parent="." node_paths=PackedStringArray("animator")]
+position = Vector2(360, -120)
+script = ExtResource("4_nhi4o")
+animator = NodePath("AnimationPlayer")
+
+[node name="Moving_Platform" type="Node2D" parent="Node2D2"]
+
+[node name="Timer" type="Timer" parent="Node2D2/Moving_Platform"]
+one_shot = true
+
+[node name="Path2D" type="Path2D" parent="Node2D2"]
+curve = SubResource("Curve2D_evfyq")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Node2D2/Path2D"]
+position = Vector2(-64, 32)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Node2D2/Path2D/PathFollow2D"]
+remote_path = NodePath("../../../animatable_body")
+update_rotation = false
+
+[node name="animatable_body" type="AnimatableBody2D" parent="Node2D2"]
+position = Vector2(-64, 32)
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/animatable_body"]
+position = Vector2(-16, 0)
+shape = SubResource("SegmentShape2D_6jdt2")
+one_way_collision = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Node2D2/animatable_body"]
+position = Vector2(-16, 0)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAACAAAAAAA=")
+tile_set = SubResource("TileSet_k8a14")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D2"]
+libraries = {
+&"": SubResource("AnimationLibrary_uspge")
+}
+
+[node name="Area2D" parent="." instance=ExtResource("6_evfyq")]
+position = Vector2(56, -48)
+
+[node name="Vines" parent="." instance=ExtResource("7_frjtu")]
+position = Vector2(200, -80)
+
+[node name="Brown_Nightmare" parent="." instance=ExtResource("8_wpk3t")]
+position = Vector2(88, -48)

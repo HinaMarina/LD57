@@ -1,20 +1,31 @@
-extends Node2D
+extends CharacterBody2D
 
 var input_vector:Vector2 = Vector2.ZERO
 @export var area:Area2D
 @export var animationPlayer:AnimationPlayer
+@export var idle_sprite:Sprite2D
+@export var death_sprite:Sprite2D
 var playerbody:CharacterBody2D
 var can_pick:=false
 
 func _ready() -> void:
+	idle_sprite.visible = true
+	death_sprite.visible = false
+	
 	area.monitoring = false
 	if input_vector.x>=0:
 		animationPlayer.play("Sit_E")
 	else:
 		animationPlayer.play("Sit_W")
 
+func _physics_process(delta: float) -> void:
+	if !is_on_floor():
+		velocity.y += 50
+	move_and_slide()
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "die":
+		queue_free()
 	area.monitoring = true
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
@@ -37,3 +48,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			var viewport = get_viewport()
 			viewport.set_input_as_handled()
 			queue_free()
+
+func take_damage():
+	animationPlayer.play("die")
