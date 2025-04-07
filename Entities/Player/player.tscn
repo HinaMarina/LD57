@@ -1,10 +1,13 @@
-[gd_scene load_steps=45 format=3 uid="uid://bsoefkhx81bfe"]
+[gd_scene load_steps=48 format=3 uid="uid://bsoefkhx81bfe"]
 
+[ext_resource type="Script" uid="uid://dvc4lscvnsiep" path="res://Entities/Player/Player_node.gd" id="1_a8wow"]
 [ext_resource type="PackedScene" uid="uid://buoaj3iht7eq3" path="res://Miscellaneous/Crt_shader_structure/crt_shader_structure.tscn" id="2_3uyv8"]
 [ext_resource type="Script" uid="uid://dba0gdem8vmnp" path="res://Entities/Player/Playerbody_script.gd" id="2_owvpp"]
 [ext_resource type="Texture2D" uid="uid://ddcdlpv4hr7e8" path="res://Entities/Player/Sprites/Idle.png" id="3_tekja"]
+[ext_resource type="Script" uid="uid://dwmtc6e8brrvg" path="res://Miscellaneous/Camera.gd" id="3_v7p16"]
 [ext_resource type="PackedScene" uid="uid://cmvb6cmxwpt6k" path="res://Entities/Player/girl.tscn" id="3_xr8lj"]
 [ext_resource type="Script" uid="uid://dgaiim467jc8h" path="res://Miscellaneous/State_Machine.gd" id="4_ap3xn"]
+[ext_resource type="Texture2D" uid="uid://cey8rfqmpfls1" path="res://Miscellaneous/Screen.png" id="4_ppdlg"]
 [ext_resource type="Texture2D" uid="uid://dukd60vquon0" path="res://Entities/Player/Sprites/RunCycle_Player-Sheet.png" id="5_4wf4l"]
 [ext_resource type="Script" uid="uid://cev0ngv3c6ory" path="res://Entities/Player/Player_States/Idle.gd" id="5_iplt1"]
 [ext_resource type="Texture2D" uid="uid://2bjhkl5dxbb6" path="res://Entities/Player/Sprites/Walking with Girl-Sheet.png" id="6_01a4e"]
@@ -851,25 +854,43 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mv1ah"]
 size = Vector2(15, 30)
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("body", "Camera")]
 z_index = 4
+script = ExtResource("1_a8wow")
+body = NodePath("CharacterBody2D")
+Camera = NodePath("CharacterBody2D/Camera2D")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_Machine")]
+collision_mask = 20
 script = ExtResource("2_owvpp")
 _Machine = NodePath("State_Machine")
 girlscene = ExtResource("3_xr8lj")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
-position = Vector2(0, -42)
+position = Vector2(14, -42)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+drag_left_margin = 0.01
+drag_top_margin = 0.01
+drag_right_margin = 0.01
+drag_bottom_margin = 0.01
+script = ExtResource("3_v7p16")
 
 [node name="crt_shader_structure" parent="CharacterBody2D/Camera2D" instance=ExtResource("2_3uyv8")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D/Camera2D"]
+
+[node name="TextureRect" type="TextureRect" parent="CharacterBody2D/Camera2D/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_ppdlg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
 libraries = {
 &"": SubResource("AnimationLibrary_01a4e")
 }
 
-[node name="State_Machine" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("Idle_State", "Run_State", "Walking_State", "Jump_Standard_State", "Jump_withgirl_State", "Shoot_State", "Death_State", "shot_spot", "animation_player", "body")]
+[node name="State_Machine" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("Idle_State", "Run_State", "Walking_State", "Jump_Standard_State", "Jump_withgirl_State", "Shoot_State", "Death_State", "Collision_Shape", "shot_spot", "animation_player", "body")]
 position = Vector2(0, -2)
 script = ExtResource("4_ap3xn")
 Idle_State = NodePath("Idle_State")
@@ -879,6 +900,7 @@ Jump_Standard_State = NodePath("Jump_Standard_State")
 Jump_withgirl_State = NodePath("Jump_withgirl_State")
 Shoot_State = NodePath("Shoot_State")
 Death_State = NodePath("Death_State")
+Collision_Shape = NodePath("../CollisionShape2D")
 shot_spot = NodePath("Shoot_State/shot_spot")
 animation_player = NodePath("../AnimationPlayer")
 body = NodePath("..")

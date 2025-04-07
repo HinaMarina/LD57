@@ -1,0 +1,203 @@
+[gd_scene load_steps=14 format=3 uid="uid://dbuw7aya0yab3"]
+
+[ext_resource type="Script" uid="uid://bk2ab5g4k0a71" path="res://Entities/Brown_Nightmare/new_brown_Nightmare/new_brown_nightmare.gd" id="1_6txea"]
+[ext_resource type="Texture2D" uid="uid://dkqf6rg6lvu0q" path="res://Entities/Brown_Nightmare/Brown_Nightmare.png" id="1_elevh"]
+[ext_resource type="Script" uid="uid://bonojtt0j1hi2" path="res://Entities/Brown_Nightmare/new_brown_Nightmare/new_brown_nightmare_body.gd" id="2_86vug"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_86vug"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qlpb2"]
+
+[sub_resource type="Animation" id="Animation_6txea"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_elevh"]
+resource_name = "Walk"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.00197454, 0.098835, 0.198835, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_86vug"]
+_data = {
+&"RESET": SubResource("Animation_6txea"),
+&"Walk": SubResource("Animation_elevh")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_86vug"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -64, 0, 0, 0, 0, 0, 64, 0)
+}
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_86vug"]
+resource_name = "Pathprogress"
+length = 1.5
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, -1.2, -1.2, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatableBody2D/Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_qlpb2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatableBody2D/Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ohage"]
+resource_name = "Pathprogress_inverse"
+length = 1.5
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, -1.2, -1.2, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatableBody2D/Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ohage"]
+_data = {
+&"Pathprogress": SubResource("Animation_86vug"),
+&"Pathprogress_inverse": SubResource("Animation_ohage"),
+&"RESET": SubResource("Animation_qlpb2")
+}
+
+[node name="NewBrownNightmare" type="Node2D" node_paths=PackedStringArray("curveanimator", "spriteanimator", "body", "sprite", "path2d", "follow")]
+script = ExtResource("1_6txea")
+curveanimator = NodePath("CurveAnimator")
+spriteanimator = NodePath("SpriteAnimator")
+body = NodePath("AnimatableBody2D")
+sprite = NodePath("AnimatableBody2D/Sprite2D")
+path2d = NodePath("Path2D")
+follow = NodePath("Path2D/PathFollow2D")
+
+[node name="AnimatableBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(-64, 0)
+collision_layer = 4
+collision_mask = 24
+slide_on_ceiling = false
+script = ExtResource("2_86vug")
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+position = Vector2(0, -13)
+texture = ExtResource("1_elevh")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_86vug")
+
+[node name="Hitbox" type="Area2D" parent="AnimatableBody2D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="AnimatableBody2D/Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_qlpb2")
+
+[node name="SpriteAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_86vug")
+}
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_86vug")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(-64, 0)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/PathFollow2D"]
+remote_path = NodePath("../../../AnimatableBody2D")
+update_rotation = false
+
+[node name="CurveAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ohage")
+}
+
+[connection signal="body_entered" from="AnimatableBody2D/Hitbox" to="." method="_on_area_2d_body_entered"]

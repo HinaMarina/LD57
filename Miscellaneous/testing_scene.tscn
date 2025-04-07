@@ -1,14 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8aqi4pkos1pp"]
+[gd_scene load_steps=8 format=3 uid="uid://b8aqi4pkos1pp"]
 
 [ext_resource type="Texture2D" uid="uid://crijlj0bcsvg8" path="res://icon.svg" id="1_cac6c"]
-[ext_resource type="PackedScene" uid="uid://bsoefkhx81bfe" path="res://Entities/Player/player.tscn" id="2_ow0ie"]
-[ext_resource type="PackedScene" uid="uid://cmvb6cmxwpt6k" path="res://Entities/Player/girl.tscn" id="3_dbvq4"]
+[ext_resource type="Script" uid="uid://chrku8o2krsb3" path="res://Miscellaneous/Stage_level_class.gd" id="1_q76oh"]
 [ext_resource type="Script" uid="uid://gjpo8skln1qr" path="res://Miscellaneous/damage_test.gd" id="4_2o1wn"]
+[ext_resource type="PackedScene" uid="uid://djnjao1us4uke" path="res://Miscellaneous/Portal/Portal.tscn" id="5_q76oh"]
+[ext_resource type="PackedScene" uid="uid://bwg46pf007h7p" path="res://Miscellaneous/Saving_spot/Saving_spot.tscn" id="5_yo2ia"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow0ie"]
 size = Vector2(138.7, 128)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2o1wn"]
+
 [node name="TESTING SCENE" type="Node2D"]
+script = ExtResource("1_q76oh")
+player_initial_spot = Vector2(189, 131)
 
 [node name="Icon2" type="Sprite2D" parent="."]
 position = Vector2(342, 271)
@@ -28,15 +33,27 @@ scale = Vector2(5.04688, 0.421875)
 texture = ExtResource("1_cac6c")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Icon"]
+collision_layer = 16
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/StaticBody2D"]
 position = Vector2(-1.38698, -6.10352e-05)
 shape = SubResource("RectangleShape2D_ow0ie")
 
-[node name="Girl" parent="." instance=ExtResource("3_dbvq4")]
-position = Vector2(465, 200)
+[node name="Saving_spot" parent="." instance=ExtResource("5_yo2ia")]
+position = Vector2(221, 192)
+scene_path = "res://Miscellaneous/testing_scene.tscn"
 
-[node name="Player" parent="." instance=ExtResource("2_ow0ie")]
-position = Vector2(189, 131)
+[node name="this_door" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="this_door"]
+position = Vector2(-105, 184)
+shape = SubResource("RectangleShape2D_2o1wn")
+
+[node name="Portal" parent="." instance=ExtResource("5_q76oh")]
+position = Vector2(10, 166)
+target_scene = "res://Scenes/Cave/Cave_Screens/cave_screen1.tscn"
+target_position = Vector2(32, -32)
 
 [connection signal="body_entered" from="Icon2/Area2D" to="Icon2" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="this_door" to="." method="_on_this_door_body_entered"]

@@ -1,0 +1,225 @@
+[gd_scene load_steps=13 format=3 uid="uid://c360slddtmk0j"]
+
+[ext_resource type="Script" uid="uid://dyx5t5vp5refe" path="res://Globals/player_death_manager.gd" id="1_nqugy"]
+[ext_resource type="PackedScene" uid="uid://bsoefkhx81bfe" path="res://Entities/Player/player.tscn" id="2_u1yv4"]
+[ext_resource type="PackedScene" uid="uid://cmvb6cmxwpt6k" path="res://Entities/Player/girl.tscn" id="3_7mpmq"]
+[ext_resource type="Texture2D" uid="uid://cmnrf8qmd2mpk" path="res://Miscellaneous/Portal/portal_mouthfull_sheet.png" id="4_rh14k"]
+
+[sub_resource type="Animation" id="Animation_7mpmq"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Death_transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.105882, 0, 0.254902, 0), Color(0.105882, 0, 0.254902, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rh14k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Death_transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.105882, 0, 0.254902, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Scene_Transition/ColorRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-320, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Spill_sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_y7qcn"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Death_transition/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.105882, 0, 0.254902, 1), Color(0.105882, 0, 0.254902, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bb84c"]
+resource_name = "transition"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Scene_Transition/ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(-5, -5),
+"update": 0,
+"values": [Vector2(-1024, 0), Vector2(320, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"transit_to"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bb84c"]
+_data = {
+&"RESET": SubResource("Animation_rh14k"),
+&"fade_in": SubResource("Animation_7mpmq"),
+&"fade_out": SubResource("Animation_y7qcn"),
+&"transition": SubResource("Animation_bb84c")
+}
+
+[sub_resource type="Animation" id="Animation_kwfrp"]
+resource_name = "Spill"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spill_sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.101308, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Spill_sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_exuan"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Spill_sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Spill_sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uu781"]
+_data = {
+&"RESET": SubResource("Animation_exuan"),
+&"Spill": SubResource("Animation_kwfrp")
+}
+
+[node name="PlayerDeathManager" type="Node2D" node_paths=PackedStringArray("animator", "canvas", "transitioncanvas", "spill_sprite", "spill_animator")]
+script = ExtResource("1_nqugy")
+player_packed_scene = ExtResource("2_u1yv4")
+girl_scene = ExtResource("3_7mpmq")
+animator = NodePath("AnimationPlayer")
+canvas = NodePath("Death_transition")
+transitioncanvas = NodePath("Scene_Transition")
+spill_sprite = NodePath("Spill_sprite")
+spill_animator = NodePath("Spill_animator")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bb84c")
+}
+
+[node name="Death_transition" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Death_transition"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.105882, 0, 0.254902, 0)
+
+[node name="Scene_Transition" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="Scene_Transition"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 320.0
+offset_right = 1024.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0342, 0.13626, 0.18, 1)
+
+[node name="Spill_sprite" type="Sprite2D" parent="."]
+visible = false
+z_index = 1
+texture = ExtResource("4_rh14k")
+hframes = 7
+
+[node name="Spill_animator" type="AnimationPlayer" parent="."]
+deterministic = true
+reset_on_save = false
+libraries = {
+&"": SubResource("AnimationLibrary_uu781")
+}

@@ -1,13 +1,13 @@
-[gd_scene load_steps=21 format=4 uid="uid://bvt8aanp6w36g"]
+[gd_scene load_steps=30 format=4 uid="uid://bvt8aanp6w36g"]
 
+[ext_resource type="Script" uid="uid://chrku8o2krsb3" path="res://Miscellaneous/Stage_level_class.gd" id="1_syssc"]
 [ext_resource type="Texture2D" uid="uid://blln8st5d2564" path="res://Scenes/Cave/Visuals/Basic_Cave_Tileset.png" id="1_v44i0"]
-[ext_resource type="PackedScene" uid="uid://bsoefkhx81bfe" path="res://Entities/Player/player.tscn" id="2_1eh64"]
-[ext_resource type="PackedScene" uid="uid://cmvb6cmxwpt6k" path="res://Entities/Player/girl.tscn" id="2_lgr5o"]
-[ext_resource type="Script" uid="uid://ce8ikamhno8h3" path="res://Scenes/Cave/moving_platform.gd" id="4_nhi4o"]
-[ext_resource type="Texture2D" uid="uid://bwipqvsqynknx" path="res://Scenes/Cave/Visuals/cave_moving_platform.png" id="5_evfyq"]
-[ext_resource type="PackedScene" uid="uid://cil3pibh82g2d" path="res://Scenes/Cave/Stalactite.tscn" id="6_evfyq"]
+[ext_resource type="Script" uid="uid://bk2ab5g4k0a71" path="res://Entities/Brown_Nightmare/new_brown_Nightmare/new_brown_nightmare.gd" id="7_5t1fy"]
 [ext_resource type="PackedScene" uid="uid://hul6vibo08pe" path="res://Scenes/Cave/Vines.tscn" id="7_frjtu"]
-[ext_resource type="PackedScene" uid="uid://cth0ichxdo0xi" path="res://Entities/Brown_Nightmare/brown_nightmare.tscn" id="8_wpk3t"]
+[ext_resource type="Script" uid="uid://bonojtt0j1hi2" path="res://Entities/Brown_Nightmare/new_brown_Nightmare/new_brown_nightmare_body.gd" id="8_syssc"]
+[ext_resource type="PackedScene" uid="uid://l8jiqbe5alvr" path="res://Entities/Fire_Nightmare/fire_nightmare.tscn" id="9_5t1fy"]
+[ext_resource type="Texture2D" uid="uid://dkqf6rg6lvu0q" path="res://Entities/Brown_Nightmare/Brown_Nightmare.png" id="9_08060"]
+[ext_resource type="PackedScene" uid="uid://cubc2gnx6nv7y" path="res://Entities/Flying_Nightmare/flying_nightmare.tscn" id="10_syssc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1eh64"]
 texture = ExtResource("1_v44i0")
@@ -33,28 +33,60 @@ b = Vector2(-60, 9)
 a = Vector2(-115, -1)
 b = Vector2(90, -1)
 
-[sub_resource type="Curve2D" id="Curve2D_nhi4o"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_86vug"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qlpb2"]
+
+[sub_resource type="Animation" id="Animation_6txea"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_elevh"]
+resource_name = "Walk"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.00197454, 0.098835, 0.198835, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_86vug"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -64, 32, 0, 0, 0, 0, -64, -64)
+&"RESET": SubResource("Animation_6txea"),
+&"Walk": SubResource("Animation_elevh")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_2mdyx"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -48, 0, 0, 0, 0, 0, 24, 0)
 }
 point_count = 2
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_6jdt2"]
-a = Vector2(0, 1)
-b = Vector2(32, 1)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6jdt2"]
-texture = ExtResource("5_evfyq")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_k8a14"]
-sources/0 = SubResource("TileSetAtlasSource_6jdt2")
-
-[sub_resource type="Animation" id="Animation_6jdt2"]
-resource_name = "path"
+[sub_resource type="Animation" id="Animation_86vug"]
+resource_name = "Pathprogress"
+length = 1.5
 loop_mode = 2
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -62,13 +94,25 @@ tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(-1.7, -1.7),
+"times": PackedFloat32Array(0, 0.2, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, -1.2, -1.2, 1),
 "update": 0,
-"values": [0.0, 1.0]
+"values": [0.0, 0.0, 1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatableBody2D/Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_k8a14"]
+[sub_resource type="Animation" id="Animation_qlpb2"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -82,23 +126,115 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.0]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_uspge"]
-_data = {
-&"RESET": SubResource("Animation_k8a14"),
-&"path": SubResource("Animation_6jdt2")
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatableBody2D/Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
-[sub_resource type="Curve2D" id="Curve2D_evfyq"]
+[sub_resource type="Animation" id="Animation_ohage"]
+resource_name = "Pathprogress_inverse"
+length = 1.5
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, -1.2, -1.2, 1),
+"update": 0,
+"values": [0.0, 0.0, 1.0, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatableBody2D/Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_syssc"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -64, 32, 0, 0, 0, 0, 40, 32)
+&"Pathprogress": SubResource("Animation_86vug"),
+&"Pathprogress_inverse": SubResource("Animation_ohage"),
+&"RESET": SubResource("Animation_qlpb2")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5t1fy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_syssc"]
+
+[sub_resource type="Animation" id="Animation_08060"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2mdyx"]
+resource_name = "Walk"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatableBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.00197454, 0.098835, 0.198835, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w667y"]
+_data = {
+&"RESET": SubResource("Animation_08060"),
+&"Walk": SubResource("Animation_2mdyx")
+}
+
+[sub_resource type="Curve2D" id="Curve2D_747ee"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 24, 0, 0, 0, 0, 0, -64, 0)
 }
 point_count = 2
 
-[node name="Cave" type="Node2D"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ohage"]
+_data = {
+&"Pathprogress": SubResource("Animation_86vug"),
+&"Pathprogress_inverse": SubResource("Animation_ohage"),
+&"RESET": SubResource("Animation_qlpb2")
+}
 
-[node name="Girl" parent="." instance=ExtResource("2_lgr5o")]
-position = Vector2(177, -96)
+[node name="Cave" type="Node2D"]
+script = ExtResource("1_syssc")
+player_initial_spot = Vector2(176, -48)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 z_index = -3
@@ -107,8 +243,8 @@ tile_map_data = PackedByteArray("AAAFAPr/AAAAAAAAAAAFAPv/AAAAAAEAAAAGAPr/AAABAAA
 tile_set = SubResource("TileSet_lgr5o")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="TileMapLayer"]
-collision_layer = 39
-collision_mask = 5
+collision_layer = 16
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer/StaticBody2D"]
 position = Vector2(141, -104)
@@ -121,7 +257,7 @@ tile_map_data = PackedByteArray("AAACAP3/AAABAAAAAAADAP3/AAABAAAAAAAEAP3/AAABAAA
 tile_set = SubResource("TileSet_lgr5o")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="TileMapLayer3"]
-collision_layer = 7
+collision_layer = 16
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMapLayer3/StaticBody2D"]
@@ -129,103 +265,124 @@ position = Vector2(133, -46)
 shape = SubResource("SegmentShape2D_lgr5o")
 one_way_collision = true
 
-[node name="Player" parent="." instance=ExtResource("2_1eh64")]
-position = Vector2(119, -121)
-
-[node name="Node2D" type="Node2D" parent="." node_paths=PackedStringArray("animator")]
-position = Vector2(320, -64)
-script = ExtResource("4_nhi4o")
-animator = NodePath("AnimationPlayer")
-
-[node name="Moving_Platform" type="Node2D" parent="Node2D"]
-
-[node name="Timer" type="Timer" parent="Node2D/Moving_Platform"]
-one_shot = true
-
-[node name="Path2D" type="Path2D" parent="Node2D"]
-curve = SubResource("Curve2D_nhi4o")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Node2D/Path2D"]
-position = Vector2(-64, 32)
-rotation = -1.5708
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Node2D/Path2D/PathFollow2D"]
-remote_path = NodePath("../../../animatable_body")
-update_rotation = false
-
-[node name="animatable_body" type="AnimatableBody2D" parent="Node2D"]
-position = Vector2(-64, 32)
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/animatable_body"]
-position = Vector2(-16, 0)
-shape = SubResource("SegmentShape2D_6jdt2")
-one_way_collision = true
-
-[node name="TileMapLayer" type="TileMapLayer" parent="Node2D/animatable_body"]
-position = Vector2(-16, 0)
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAACAAAAAAA=")
-tile_set = SubResource("TileSet_k8a14")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
-libraries = {
-&"": SubResource("AnimationLibrary_uspge")
-}
-
-[node name="Node2D2" type="Node2D" parent="." node_paths=PackedStringArray("animator")]
-position = Vector2(360, -120)
-script = ExtResource("4_nhi4o")
-animator = NodePath("AnimationPlayer")
-
-[node name="Moving_Platform" type="Node2D" parent="Node2D2"]
-
-[node name="Timer" type="Timer" parent="Node2D2/Moving_Platform"]
-one_shot = true
-
-[node name="Path2D" type="Path2D" parent="Node2D2"]
-curve = SubResource("Curve2D_evfyq")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Node2D2/Path2D"]
-position = Vector2(-64, 32)
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Node2D2/Path2D/PathFollow2D"]
-remote_path = NodePath("../../../animatable_body")
-update_rotation = false
-
-[node name="animatable_body" type="AnimatableBody2D" parent="Node2D2"]
-position = Vector2(-64, 32)
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/animatable_body"]
-position = Vector2(-16, 0)
-shape = SubResource("SegmentShape2D_6jdt2")
-one_way_collision = true
-
-[node name="TileMapLayer" type="TileMapLayer" parent="Node2D2/animatable_body"]
-position = Vector2(-16, 0)
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAACAAAAAAA=")
-tile_set = SubResource("TileSet_k8a14")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D2"]
-libraries = {
-&"": SubResource("AnimationLibrary_uspge")
-}
-
-[node name="Area2D" parent="." instance=ExtResource("6_evfyq")]
-position = Vector2(56, -48)
-
 [node name="Vines" parent="." instance=ExtResource("7_frjtu")]
 position = Vector2(200, -80)
 
-[node name="Brown_Nightmare" parent="." instance=ExtResource("8_wpk3t")]
-position = Vector2(152, -56)
+[node name="fire_nightmare" parent="." instance=ExtResource("9_5t1fy")]
+position = Vector2(96, -96)
 
-[node name="Left_limit" parent="Brown_Nightmare" index="3"]
-position = Vector2(-56, 80)
+[node name="Flying_Nightmare" parent="." instance=ExtResource("10_syssc")]
+position = Vector2(80, -136)
 
-[node name="Right_limit" parent="Brown_Nightmare" index="4"]
-position = Vector2(40, 80)
+[node name="NewBrownNightmare" type="Node2D" parent="." node_paths=PackedStringArray("curveanimator", "spriteanimator", "body", "sprite", "path2d", "follow")]
+position = Vector2(136, -112)
+script = ExtResource("7_5t1fy")
+curveanimator = NodePath("CurveAnimator")
+spriteanimator = NodePath("SpriteAnimator")
+body = NodePath("AnimatableBody2D")
+sprite = NodePath("AnimatableBody2D/Sprite2D")
+path2d = NodePath("Path2D")
+follow = NodePath("Path2D/PathFollow2D")
 
-[editable path="Brown_Nightmare"]
+[node name="AnimatableBody2D" type="CharacterBody2D" parent="NewBrownNightmare"]
+position = Vector2(-48, 0)
+collision_layer = 4
+collision_mask = 24
+slide_on_ceiling = false
+script = ExtResource("8_syssc")
+
+[node name="Sprite2D" type="Sprite2D" parent="NewBrownNightmare/AnimatableBody2D"]
+position = Vector2(0, -13)
+texture = ExtResource("9_08060")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NewBrownNightmare/AnimatableBody2D"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_86vug")
+
+[node name="Hitbox" type="Area2D" parent="NewBrownNightmare/AnimatableBody2D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="NewBrownNightmare/AnimatableBody2D/Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_qlpb2")
+
+[node name="SpriteAnimator" type="AnimationPlayer" parent="NewBrownNightmare"]
+libraries = {
+&"": SubResource("AnimationLibrary_86vug")
+}
+
+[node name="Path2D" type="Path2D" parent="NewBrownNightmare"]
+curve = SubResource("Curve2D_2mdyx")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="NewBrownNightmare/Path2D"]
+position = Vector2(-48, 0)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="NewBrownNightmare/Path2D/PathFollow2D"]
+remote_path = NodePath("../../../AnimatableBody2D")
+update_rotation = false
+
+[node name="CurveAnimator" type="AnimationPlayer" parent="NewBrownNightmare"]
+libraries = {
+&"": SubResource("AnimationLibrary_syssc")
+}
+
+[node name="NewBrownNightmare2" type="Node2D" parent="." node_paths=PackedStringArray("curveanimator", "spriteanimator", "body", "sprite", "path2d", "follow")]
+position = Vector2(96, -56)
+script = ExtResource("7_5t1fy")
+curveanimator = NodePath("CurveAnimator")
+spriteanimator = NodePath("SpriteAnimator")
+body = NodePath("AnimatableBody2D")
+sprite = NodePath("AnimatableBody2D/Sprite2D")
+path2d = NodePath("Path2D")
+follow = NodePath("Path2D/PathFollow2D")
+inversion = true
+
+[node name="AnimatableBody2D" type="CharacterBody2D" parent="NewBrownNightmare2"]
+position = Vector2(24, 0)
+collision_layer = 4
+collision_mask = 24
+slide_on_ceiling = false
+script = ExtResource("8_syssc")
+
+[node name="Sprite2D" type="Sprite2D" parent="NewBrownNightmare2/AnimatableBody2D"]
+position = Vector2(0, -13)
+texture = ExtResource("9_08060")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NewBrownNightmare2/AnimatableBody2D"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_5t1fy")
+
+[node name="Hitbox" type="Area2D" parent="NewBrownNightmare2/AnimatableBody2D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="NewBrownNightmare2/AnimatableBody2D/Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_syssc")
+
+[node name="SpriteAnimator" type="AnimationPlayer" parent="NewBrownNightmare2"]
+libraries = {
+&"": SubResource("AnimationLibrary_w667y")
+}
+
+[node name="Path2D" type="Path2D" parent="NewBrownNightmare2"]
+curve = SubResource("Curve2D_747ee")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="NewBrownNightmare2/Path2D"]
+position = Vector2(24, 0)
+rotation = 3.14159
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="NewBrownNightmare2/Path2D/PathFollow2D"]
+remote_path = NodePath("../../../AnimatableBody2D")
+update_rotation = false
+
+[node name="CurveAnimator" type="AnimationPlayer" parent="NewBrownNightmare2"]
+libraries = {
+&"": SubResource("AnimationLibrary_ohage")
+}
+
+[connection signal="body_entered" from="NewBrownNightmare/AnimatableBody2D/Hitbox" to="NewBrownNightmare" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="NewBrownNightmare2/AnimatableBody2D/Hitbox" to="NewBrownNightmare2" method="_on_area_2d_body_entered"]

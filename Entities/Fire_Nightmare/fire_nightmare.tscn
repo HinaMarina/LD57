@@ -1,0 +1,212 @@
+[gd_scene load_steps=11 format=3 uid="uid://l8jiqbe5alvr"]
+
+[ext_resource type="Script" uid="uid://bh5q3laplrx5y" path="res://Entities/Fire_Nightmare/FireNightmare_body.gd" id="1_5u6d0"]
+[ext_resource type="Script" uid="uid://bkfdilnpvos84" path="res://Entities/Fire_Nightmare/fire_nightmare.gd" id="1_lbq5l"]
+[ext_resource type="Texture2D" uid="uid://mbsab13vasfv" path="res://Entities/Fire_Nightmare/Fire_NightMare.png" id="1_x54pa"]
+
+[sub_resource type="Animation" id="Animation_x54pa"]
+resource_name = "IDLE"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.101116, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D/Area2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6dimd"]
+radius = 3.0
+height = 12.0
+
+[sub_resource type="Animation" id="Animation_5u6d0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D/Area2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterBody2D/Area2D/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-7, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CharacterBody2D/Area2D/CollisionShape2D:shape")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CapsuleShape2D_6dimd")]
+}
+
+[sub_resource type="Animation" id="Animation_lbq5l"]
+resource_name = "SHOOT"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D/Area2D/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterBody2D/Area2D/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0995952, 0.399919, 0.602151, 0.701746, 0.800581, 0.899492, 1.00061),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(-7, 0), Vector2(-7, 0), Vector2(-8, 0), Vector2(-10, 0), Vector2(-30, 0), Vector2(-38, 0), Vector2(-55, 0), Vector2(-78, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CharacterBody2D/Area2D/CollisionShape2D:shape")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y12fl"]
+_data = {
+&"IDLE": SubResource("Animation_x54pa"),
+&"RESET": SubResource("Animation_5u6d0"),
+&"SHOOT": SubResource("Animation_lbq5l")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y12fl"]
+radius = 6.0
+height = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lbq5l"]
+radius = 5.0
+
+[node name="fire_nightmare" type="Node2D" node_paths=PackedStringArray("raycastleft", "raycastright", "body", "animator")]
+script = ExtResource("1_lbq5l")
+raycastleft = NodePath("RayCastleft")
+raycastright = NodePath("RayCastright")
+body = NodePath("CharacterBody2D")
+animator = NodePath("CharacterBody2D/AnimationPlayer")
+
+[node name="CharacterBody2D" type="StaticBody2D" parent="."]
+collision_layer = 5
+collision_mask = 5
+script = ExtResource("1_5u6d0")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("1_x54pa")
+offset = Vector2(-35, -2)
+hframes = 18
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_y12fl")
+}
+
+[node name="Area2D" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
+position = Vector2(-7, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_6dimd")
+disabled = true
+
+[node name="Area2D2" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Area2D2"]
+position = Vector2(1, 0)
+shape = SubResource("CapsuleShape2D_y12fl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_lbq5l")
+
+[node name="RayCastleft" type="RayCast2D" parent="."]
+target_position = Vector2(-150, 0)
+
+[node name="RayCastright" type="RayCast2D" parent="."]
+scale = Vector2(-1, 1)
+target_position = Vector2(-150, 0)
+
+[connection signal="animation_finished" from="CharacterBody2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="CharacterBody2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="CharacterBody2D/Area2D2" to="." method="_on_area_2d_2_body_entered"]

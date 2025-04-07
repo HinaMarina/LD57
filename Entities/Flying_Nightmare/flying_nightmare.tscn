@@ -1,0 +1,100 @@
+[gd_scene load_steps=13 format=3 uid="uid://cubc2gnx6nv7y"]
+
+[ext_resource type="Script" uid="uid://dg2vp2ivahls0" path="res://Entities/Flying_Nightmare/flying_nightmare.gd" id="1_amfeb"]
+[ext_resource type="Script" uid="uid://c442cpld7jcud" path="res://flying_nightmare.gd" id="1_pks2t"]
+[ext_resource type="Texture2D" uid="uid://40iobpenymd0" path="res://Entities/Flying_Nightmare/Flying Nightmare-Sheet.png" id="2_amfeb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yeh7w"]
+radius = 11.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43il4"]
+atlas = ExtResource("2_amfeb")
+region = Rect2(0, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6i2i"]
+atlas = ExtResource("2_amfeb")
+region = Rect2(60, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whex4"]
+atlas = ExtResource("2_amfeb")
+region = Rect2(120, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lox6s"]
+atlas = ExtResource("2_amfeb")
+region = Rect2(180, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ubjpq"]
+atlas = ExtResource("2_amfeb")
+region = Rect2(240, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iuah8"]
+atlas = ExtResource("2_amfeb")
+region = Rect2(300, 0, 60, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dfa00"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43il4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6i2i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whex4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lox6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ubjpq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuah8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_43il4"]
+radius = 100.0
+
+[node name="Flying_Nightmare" type="Node2D" node_paths=PackedStringArray("mybody")]
+script = ExtResource("1_amfeb")
+mybody = NodePath("CharacterBody2D")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 4
+collision_mask = 24
+motion_mode = 1
+script = ExtResource("1_pks2t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(3, -1)
+shape = SubResource("CircleShape2D_yeh7w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_dfa00")
+autoplay = "default"
+frame_progress = 0.648367
+
+[node name="hitbox" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="CharacterBody2D/hitbox"]
+position = Vector2(3, -1)
+shape = SubResource("CircleShape2D_yeh7w")
+
+[node name="Detection_Area" type="Area2D" parent="CharacterBody2D"]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Detection_Area"]
+position = Vector2(3, -1)
+shape = SubResource("CircleShape2D_43il4")
+
+[connection signal="body_entered" from="CharacterBody2D/hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="body_entered" from="CharacterBody2D/Detection_Area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="CharacterBody2D/Detection_Area" to="." method="_on_detection_area_body_exited"]

@@ -1,7 +1,8 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 @export var _Machine:State_Machine
 @export var girlscene:PackedScene
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_released("Pick_Girl") && _Machine.is_holding_girl && is_on_floor():

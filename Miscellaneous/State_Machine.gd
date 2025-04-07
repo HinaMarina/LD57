@@ -7,6 +7,7 @@ class_name State_Machine extends State
 @export var Jump_withgirl_State :State
 @export var Shoot_State :State
 @export var Death_State :State
+@export var Collision_Shape :CollisionShape2D
 
 @export var shot_spot:Node2D
 var can_shoot:=true
@@ -44,13 +45,19 @@ func select_state():
 			set_state(Walking_State)
 		else:
 			set_state(Run_State)
-	if Input.is_action_just_pressed("Jump") && can_player_move && grounded:
+	if Input.is_action_just_pressed("Jump") && can_player_move && grounded && !Input.is_action_pressed("ui_down"):
 		if is_holding_girl:
 			set_state(Jump_withgirl_State)
 		else:
 			set_state(Jump_Standard_State)
 
 func _input(event: InputEvent) -> void:
+	if Input.is_action_pressed("ui_down"):
+		if Input.is_action_just_pressed("Jump"):
+			Collision_Shape.set_deferred("disabled",true)
+			await get_tree().create_timer(0.1).timeout
+			Collision_Shape.set_deferred("disabled",false)
+			
 	if Input.is_action_pressed("Movement_action"):
 		if can_player_move:
 			var playerinput :Vector2
@@ -63,6 +70,7 @@ func _input(event: InputEvent) -> void:
 		can_player_move = false
 		await get_tree().create_timer(1).timeout
 		can_shoot = true
+	
 
 func take_damage():
 	set_state(Death_State)

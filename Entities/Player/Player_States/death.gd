@@ -14,9 +14,11 @@ func die():
 		animation_player.play("Death_Anim_withgirl")
 	else:
 		animation_player.play("Death_Anim")
+	Camera.position_smoothing_enabled = false
+	Camera.shake(2.0)
 
 func on_animation_finished(anim_name:StringName):
 	if anim_name == "Death_Anim_withgirl" || anim_name == "Death_Anim":
-		Camera.reparent(get_tree().root)
-		Camera.enabled = true
+		PlayerDeathManager.player_died()
 		body.get_parent().queue_free()
+		
