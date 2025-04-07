@@ -184,7 +184,7 @@ _data = {
 
 [node name="CaveScreen1" type="Node2D" node_paths=PackedStringArray("camera_limit_diagonal_right", "camera_limit_diagonal_left")]
 script = ExtResource("1_blu13")
-player_initial_spot = Vector2(560, -232)
+player_initial_spot = Vector2(32, -32)
 camera_limit_diagonal_right = NodePath("stage_limit_diagonal_right")
 camera_limit_diagonal_left = NodePath("stage_limit_diagonal_left")
 metadata/_custom_type_script = "uid://chrku8o2krsb3"

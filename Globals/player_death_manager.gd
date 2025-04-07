@@ -41,13 +41,15 @@ func player_died():
 	var scene = load(last_scene_saved)
 	animator.play("fade_in")
 	await animator.animation_finished
+	if is_instance_valid(playerCamera):
+		playerCamera.queue_free()
 	if get_tree().get_current_scene() == scene:
 		get_tree().unload_current_scene()
 	get_tree().call_deferred("change_scene_to_packed", scene)
 	canvas.visible = true
 	await Engine.get_main_loop().process_frame
 	await Engine.get_main_loop().process_frame
-
+	
 	
 	var current_scene = get_tree().get_current_scene()
 	current_scene.add_child(player)
@@ -99,8 +101,7 @@ func transit_to():
 	
 	
 	
-func set_player_camera(player:player_node,current_scene:stage_level,is_portal:bool):
-
+func set_player_camera(player:player_node,current_scene:stage_level,is_portal:bool):		
 	if current_scene.camera_limit_diagonal_left == null || current_scene.camera_limit_diagonal_right == null:
 		return
 	player.Camera.limit_bottom = current_scene.camera_limit_diagonal_left.global_position.y

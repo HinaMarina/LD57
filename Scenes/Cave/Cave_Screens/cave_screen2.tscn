@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=4 uid="uid://dslwksfd2mwoh"]
+[gd_scene load_steps=66 format=4 uid="uid://dslwksfd2mwoh"]
 
 [ext_resource type="Script" uid="uid://chrku8o2krsb3" path="res://Miscellaneous/Stage_level_class.gd" id="1_omthr"]
 [ext_resource type="Texture2D" uid="uid://blln8st5d2564" path="res://Scenes/Cave/Visuals/Basic_Cave_Tileset.png" id="2_n0ptj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bwipqvsqynknx" path="res://Scenes/Cave/Visuals/cave_moving_platform.png" id="4_1kdeo"]
 [ext_resource type="PackedScene" uid="uid://hul6vibo08pe" path="res://Scenes/Cave/Vines.tscn" id="5_1kdeo"]
 [ext_resource type="PackedScene" uid="uid://bwg46pf007h7p" path="res://Miscellaneous/Saving_spot/Saving_spot.tscn" id="5_glf8j"]
+[ext_resource type="PackedScene" uid="uid://cil3pibh82g2d" path="res://Scenes/Cave/Stalactite.tscn" id="6_ssm2r"]
 [ext_resource type="Script" uid="uid://bk2ab5g4k0a71" path="res://Entities/Brown_Nightmare/new_brown_Nightmare/new_brown_nightmare.gd" id="6_v7416"]
 [ext_resource type="Script" uid="uid://bonojtt0j1hi2" path="res://Entities/Brown_Nightmare/new_brown_Nightmare/new_brown_nightmare_body.gd" id="7_glf8j"]
 [ext_resource type="Texture2D" uid="uid://dkqf6rg6lvu0q" path="res://Entities/Brown_Nightmare/Brown_Nightmare.png" id="8_188ap"]
@@ -1021,9 +1022,18 @@ libraries = {
 }
 
 [node name="Portal" parent="." instance=ExtResource("10_188ap")]
-position = Vector2(24, -296)
+position = Vector2(24, -312)
 target_scene = "res://Scenes/Cave/Cave_Screens/cave_screen3.tscn"
 target_position = Vector2(336, -16)
+
+[node name="Area2D" parent="." instance=ExtResource("6_ssm2r")]
+position = Vector2(520, 96)
+
+[node name="Area2D2" parent="." instance=ExtResource("6_ssm2r")]
+position = Vector2(504, 96)
+
+[node name="Area2D3" parent="." instance=ExtResource("6_ssm2r")]
+position = Vector2(488, 96)
 
 [connection signal="body_entered" from="NewBrownNightmare/AnimatableBody2D/Hitbox" to="NewBrownNightmare" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="NewBrownNightmare2/AnimatableBody2D/Hitbox" to="NewBrownNightmare2" method="_on_area_2d_body_entered"]

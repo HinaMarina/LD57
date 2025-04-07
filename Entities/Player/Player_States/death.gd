@@ -20,5 +20,6 @@ func die():
 func on_animation_finished(anim_name:StringName):
 	if anim_name == "Death_Anim_withgirl" || anim_name == "Death_Anim":
 		PlayerDeathManager.player_died()
+		Camera.reparent(get_tree().root)
 		body.get_parent().queue_free()
 		
