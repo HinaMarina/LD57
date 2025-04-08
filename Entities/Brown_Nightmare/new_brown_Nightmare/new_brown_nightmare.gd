@@ -1,4 +1,4 @@
-extends Node2D
+extends nightmare
 @export var curveanimator:AnimationPlayer
 @export var spriteanimator:AnimationPlayer
 @export var body:CharacterBody2D

@@ -1,4 +1,6 @@
 extends State
+@export var soundFX:AudioStreamPlayer2D
+var is_dead:=false
 
 func _ready() -> void:
 	super()
@@ -8,8 +10,12 @@ func do():
 	die()
 	
 func die():
+	if is_dead:
+		return
+	is_dead = true
 	var state_machine = get_parent()
 	state_machine.can_player_move = false
+	soundFX.play()
 	if is_holding_girl:
 		animation_player.play("Death_Anim_withgirl")
 	else:

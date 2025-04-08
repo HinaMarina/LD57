@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://blwh4iw13om11"]
+[gd_scene load_steps=20 format=3 uid="uid://blwh4iw13om11"]
 
 [ext_resource type="Script" uid="uid://cce1atkxoe0fi" path="res://Entities/Player/spiritual_shot.gd" id="1_avfmd"]
 [ext_resource type="Texture2D" uid="uid://cqbkjg2wp1af6" path="res://Entities/Player/Sprites/shot_sprite.png" id="1_ufr2y"]
+[ext_resource type="Texture2D" uid="uid://rlb6m12uckkw" path="res://Miscellaneous/Nightmare_Death_Anim.png" id="3_6fj0o"]
+[ext_resource type="AudioStream" uid="uid://dff8jm4myo0ou" path="res://Sound/SoundFX/shooting_explosion.wav" id="4_fvpw5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_avfmd"]
 atlas = ExtResource("1_ufr2y")
@@ -27,6 +29,34 @@ region = Rect2(80, 0, 20, 20)
 atlas = ExtResource("1_ufr2y")
 region = Rect2(100, 0, 20, 20)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbcx6"]
+atlas = ExtResource("3_6fj0o")
+region = Rect2(0, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13lpl"]
+atlas = ExtResource("3_6fj0o")
+region = Rect2(60, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xi36v"]
+atlas = ExtResource("3_6fj0o")
+region = Rect2(120, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pwl2"]
+atlas = ExtResource("3_6fj0o")
+region = Rect2(180, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jp4up"]
+atlas = ExtResource("3_6fj0o")
+region = Rect2(240, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xd4gq"]
+atlas = ExtResource("3_6fj0o")
+region = Rect2(300, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8h20"]
+atlas = ExtResource("3_6fj0o")
+region = Rect2(360, 0, 60, 60)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_cbr1e"]
 animations = [{
 "frames": [{
@@ -51,22 +81,60 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbcx6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13lpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xi36v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pwl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jp4up")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xd4gq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8h20")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 10.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ufr2y"]
 radius = 2.0
 
-[node name="Spritual_shot" type="Area2D"]
+[node name="spiritual_shot_body" type="CharacterBody2D" node_paths=PackedStringArray("anim_sprite", "soundFX")]
+motion_mode = 1
+script = ExtResource("1_avfmd")
+anim_sprite = NodePath("Spritual_shot/AnimatedSprite2D")
+soundFX = NodePath("AudioStreamPlayer2D")
+
+[node name="Spritual_shot" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 4
-script = ExtResource("1_avfmd")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Spritual_shot"]
 sprite_frames = SubResource("SpriteFrames_cbr1e")
+animation = &"explosion"
 autoplay = "default"
-frame_progress = 0.550292
+frame = 6
+frame_progress = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spritual_shot"]
 shape = SubResource("CircleShape2D_ufr2y")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_fvpw5")
+volume_db = 10.0
+pitch_scale = 1.35
+
+[connection signal="body_entered" from="Spritual_shot" to="." method="_on_spritual_shot_body_entered"]

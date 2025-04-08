@@ -1,4 +1,4 @@
-extends Node2D
+extends nightmare
 
 
 @export var raycastleft:RayCast2D

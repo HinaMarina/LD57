@@ -8,6 +8,8 @@ var input_vector:Vector2 = Vector2.ZERO
 var playerbody:CharacterBody2D
 var can_pick:=false
 
+signal girl_is_dead
+
 func _ready() -> void:
 	idle_sprite.visible = true
 	death_sprite.visible = false
@@ -25,6 +27,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "die":
+		PlayerDeathManager.player_died()
 		queue_free()
 	area.monitoring = true
 

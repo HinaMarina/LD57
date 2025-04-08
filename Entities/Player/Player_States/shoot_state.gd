@@ -2,11 +2,13 @@ extends State
 
 @export var spiritual_shot_scene:PackedScene
 @export var shot_spot:Node2D
+@export var soundFX:AudioStreamPlayer2D
 func _ready() -> void:
 	super()
 	animation_player.animation_finished.connect(on_animation_finished)
 	
 func shoot():
+	soundFX.play()
 	shot_spot.global_position.x = body.global_position.x + input_vector.x*20
 	var spiritual_shot = spiritual_shot_scene.instantiate()
 	var parent = body.get_parent().get_parent()

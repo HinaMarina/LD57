@@ -19,6 +19,8 @@ var player_to_transit:player_node
 
 signal player_is_dead
 
+
+
 func _ready() -> void:
 	spill_sprite.visible = false
 
@@ -114,6 +116,7 @@ func set_player_camera(player:player_node,current_scene:stage_level,is_portal:bo
 		player.body._Machine.can_player_move = false
 		spill_sprite.global_position = player.body.global_position + Vector2(0,-25)
 		spill_animator.play_backwards("Spill")
+		print('oi')
 
 		await spill_animator.animation_finished
 	

@@ -105,6 +105,7 @@ position = Vector2(0, -28)
 shape = SubResource("RectangleShape2D_s33sa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
 sprite_frames = SubResource("SpriteFrames_m83hl")
 animation = &"Saved"
 autoplay = "Idle"

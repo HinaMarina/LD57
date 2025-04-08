@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=4 uid="uid://dslwksfd2mwoh"]
+[gd_scene load_steps=67 format=4 uid="uid://dslwksfd2mwoh"]
 
 [ext_resource type="Script" uid="uid://chrku8o2krsb3" path="res://Miscellaneous/Stage_level_class.gd" id="1_omthr"]
 [ext_resource type="Texture2D" uid="uid://blln8st5d2564" path="res://Scenes/Cave/Visuals/Basic_Cave_Tileset.png" id="2_n0ptj"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bonojtt0j1hi2" path="res://Entities/Brown_Nightmare/new_brown_Nightmare/new_brown_nightmare_body.gd" id="7_glf8j"]
 [ext_resource type="Texture2D" uid="uid://dkqf6rg6lvu0q" path="res://Entities/Brown_Nightmare/Brown_Nightmare.png" id="8_188ap"]
 [ext_resource type="PackedScene" uid="uid://djnjao1us4uke" path="res://Miscellaneous/Portal/Portal.tscn" id="10_188ap"]
+[ext_resource type="AudioStream" uid="uid://cx52actpfgtf8" path="res://Sound/Music/Level_Song.wav" id="12_agfp5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kc0u0"]
 texture = ExtResource("2_n0ptj")
@@ -615,11 +616,11 @@ position = Vector2(600, -16)
 
 [node name="diagonal_left" type="Node2D" parent="."]
 z_index = -3
-position = Vector2(-64, 64)
+position = Vector2(-16, 48)
 
 [node name="diagonal_right" type="Node2D" parent="."]
 z_index = -3
-position = Vector2(768, -512)
+position = Vector2(664, -512)
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 z_index = -3
@@ -1034,6 +1035,11 @@ position = Vector2(504, 96)
 
 [node name="Area2D3" parent="." instance=ExtResource("6_ssm2r")]
 position = Vector2(488, 96)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_agfp5")
+autoplay = true
+max_distance = 4000.0
 
 [connection signal="body_entered" from="NewBrownNightmare/AnimatableBody2D/Hitbox" to="NewBrownNightmare" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="NewBrownNightmare2/AnimatableBody2D/Hitbox" to="NewBrownNightmare2" method="_on_area_2d_body_entered"]

@@ -1,12 +1,15 @@
-[gd_scene load_steps=36 format=4 uid="uid://bx3y7j8c4i1cj"]
+[gd_scene load_steps=39 format=4 uid="uid://bx3y7j8c4i1cj"]
 
-[ext_resource type="Script" uid="uid://chrku8o2krsb3" path="res://Miscellaneous/Stage_level_class.gd" id="1_blu13"]
+[ext_resource type="Script" uid="uid://car2tygq8lesm" path="res://Scenes/Cave/Cave_Screens/cave_screen_1.gd" id="1_2qypi"]
 [ext_resource type="Texture2D" uid="uid://blln8st5d2564" path="res://Scenes/Cave/Visuals/Basic_Cave_Tileset.png" id="2_h21ul"]
 [ext_resource type="Script" uid="uid://ce8ikamhno8h3" path="res://Scenes/Cave/moving_platform.gd" id="3_7ca10"]
 [ext_resource type="Texture2D" uid="uid://bwipqvsqynknx" path="res://Scenes/Cave/Visuals/cave_moving_platform.png" id="4_qjj87"]
+[ext_resource type="PackedScene" uid="uid://bwg46pf007h7p" path="res://Miscellaneous/Saving_spot/Saving_spot.tscn" id="5_j5t32"]
 [ext_resource type="PackedScene" uid="uid://hul6vibo08pe" path="res://Scenes/Cave/Vines.tscn" id="5_qjj87"]
 [ext_resource type="PackedScene" uid="uid://cmvb6cmxwpt6k" path="res://Entities/Player/girl.tscn" id="6_dogvb"]
 [ext_resource type="PackedScene" uid="uid://djnjao1us4uke" path="res://Miscellaneous/Portal/Portal.tscn" id="7_q46wv"]
+[ext_resource type="AudioStream" uid="uid://cx52actpfgtf8" path="res://Sound/Music/Level_Song.wav" id="8_ide77"]
+[ext_resource type="PackedScene" uid="uid://bsoefkhx81bfe" path="res://Entities/Player/player.tscn" id="9_2qypi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_f7aqu"]
 texture = ExtResource("2_h21ul")
@@ -64,7 +67,7 @@ a = Vector2(432, 272)
 b = Vector2(432, -256)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_g2dra"]
-a = Vector2(432, 264)
+a = Vector2(432, 328)
 b = Vector2(432, -200)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ca10"]
@@ -182,11 +185,12 @@ _data = {
 &"path": SubResource("Animation_112pu")
 }
 
-[node name="CaveScreen1" type="Node2D" node_paths=PackedStringArray("camera_limit_diagonal_right", "camera_limit_diagonal_left")]
-script = ExtResource("1_blu13")
+[node name="CaveScreen1" type="Node2D" node_paths=PackedStringArray("camera_limit_diagonal_right", "camera_limit_diagonal_left", "player")]
+script = ExtResource("1_2qypi")
 player_initial_spot = Vector2(32, -32)
 camera_limit_diagonal_right = NodePath("stage_limit_diagonal_right")
 camera_limit_diagonal_left = NodePath("stage_limit_diagonal_left")
+player = NodePath("Player")
 metadata/_custom_type_script = "uid://chrku8o2krsb3"
 
 [node name="TileMapLayer3" type="TileMapLayer" parent="."]
@@ -225,10 +229,10 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAABAAAAAAABAAAAAAACAAAAAAABAAA
 tile_set = SubResource("TileSet_7ca10")
 
 [node name="stage_limit_diagonal_right" type="Node2D" parent="."]
-position = Vector2(768, -512)
+position = Vector2(656, -512)
 
 [node name="stage_limit_diagonal_left" type="Node2D" parent="."]
-position = Vector2(-64, 64)
+position = Vector2(-16, 32)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 collision_layer = 16
@@ -331,6 +335,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_uspge")
 }
 
+[node name="Saving_spot" parent="StaticBody2D" instance=ExtResource("5_j5t32")]
+position = Vector2(48, -8)
+
 [node name="Node2D" type="Node2D" parent="." node_paths=PackedStringArray("animator")]
 position = Vector2(176, -104)
 script = ExtResource("3_7ca10")
@@ -385,3 +392,11 @@ position = Vector2(264, 0)
 position = Vector2(560, -472)
 target_scene = "res://Scenes/Cave/Cave_Screens/cave_screen2.tscn"
 target_position = Vector2(600, -16)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ide77")
+autoplay = true
+max_distance = 4096.0
+
+[node name="Player" parent="." instance=ExtResource("9_2qypi")]
+position = Vector2(24, -8)

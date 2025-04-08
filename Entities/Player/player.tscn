@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://bsoefkhx81bfe"]
+[gd_scene load_steps=52 format=3 uid="uid://bsoefkhx81bfe"]
 
 [ext_resource type="Script" uid="uid://dvc4lscvnsiep" path="res://Entities/Player/Player_node.gd" id="1_a8wow"]
 [ext_resource type="PackedScene" uid="uid://buoaj3iht7eq3" path="res://Miscellaneous/Crt_shader_structure/crt_shader_structure.tscn" id="2_3uyv8"]
@@ -18,10 +18,14 @@
 [ext_resource type="Texture2D" uid="uid://sg2x6lt6ydwf" path="res://Entities/Player/Sprites/Jump_with_girl-Sheet.png" id="8_x1y6q"]
 [ext_resource type="Script" uid="uid://bsnbuhbaa73sb" path="res://Entities/Player/Player_States/jump_standard_state.gd" id="12_r8fok"]
 [ext_resource type="Script" uid="uid://b1o2lmsc0yryk" path="res://Entities/Player/Player_States/jump_withgirl_state.gd" id="14_nhbkt"]
+[ext_resource type="AudioStream" uid="uid://vwwyep1cc1xx" path="res://Sound/SoundFX/jump_sound.wav" id="16_01ng6"]
 [ext_resource type="Script" uid="uid://dpmm2foiaesft" path="res://Entities/Player/Player_States/shoot_state.gd" id="16_vskfa"]
 [ext_resource type="PackedScene" uid="uid://blwh4iw13om11" path="res://Entities/Player/spiritual_shot.tscn" id="17_pjcup"]
 [ext_resource type="Texture2D" uid="uid://xi4v0miu38dq" path="res://Entities/Player/Sprites/Player_Death_Anim.png" id="19_0poeq"]
 [ext_resource type="Script" uid="uid://drrk4tollyfs0" path="res://Entities/Player/Player_States/death.gd" id="19_ppdlg"]
+[ext_resource type="AudioStream" uid="uid://jp4oy4jd4eo6" path="res://Sound/SoundFX/Shooting_sound.wav" id="21_avsg8"]
+[ext_resource type="AudioStream" uid="uid://8kea2mf8yd3w" path="res://Sound/SoundFX/death_sound.wav" id="24_dv6dp"]
+[ext_resource type="AudioStream" uid="uid://d0cs1gj285g7c" path="res://Sound/SoundFX/putting_girl.wav" id="26_ui1ln"]
 
 [sub_resource type="Animation" id="Animation_v27kq"]
 resource_name = "Death_Anim"
@@ -315,6 +319,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("State_Machine/Jump_Standard_State/AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_0poeq"]
 resource_name = "Jump_Standard_UP_W"
@@ -343,6 +359,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("State_Machine/Jump_Standard_State/AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_ui1ln"]
@@ -430,6 +458,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("State_Machine/Jump_Standard_State/AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_01ng6"]
 resource_name = "Jump_withgirl_UP_W"
@@ -457,6 +497,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("State_Machine/Jump_Standard_State/AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_5c2io"]
@@ -617,6 +669,42 @@ tracks/12/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("State_Machine/Jump_Standard_State/AudioStreamPlayer2D:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("State_Machine/Walking_State/pick_girl_soundfx2:pitch_scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.34]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("State_Machine/Walking_State/pick_girl_soundfx2:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_lub02"]
 resource_name = "Run_Standard_E"
@@ -647,6 +735,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("State_Machine/Walking_State/pick_girl_soundfx2:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.402182),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.5, 2.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("State_Machine/Walking_State/pick_girl_soundfx2:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.402182),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
 
 [sub_resource type="Animation" id="Animation_4wf4l"]
 resource_name = "Run_Standard_W"
@@ -676,6 +788,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("State_Machine/Walking_State/pick_girl_soundfx2:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.399902),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.5, 2.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("State_Machine/Walking_State/pick_girl_soundfx2:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.399902),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
 }
 
 [sub_resource type="Animation" id="Animation_nhbkt"]
@@ -793,6 +929,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("State_Machine/Walking_State/pick_girl_soundfx2:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.400662),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.34, 1.63]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("State_Machine/Walking_State/pick_girl_soundfx2:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
 
 [sub_resource type="Animation" id="Animation_r8fok"]
 resource_name = "Walking_W"
@@ -822,6 +982,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("State_Machine/Walking_State/pick_girl_soundfx2:pitch_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.34, 1.63]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("State_Machine/Walking_State/pick_girl_soundfx2:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_01a4e"]
@@ -860,15 +1044,15 @@ script = ExtResource("1_a8wow")
 body = NodePath("CharacterBody2D")
 Camera = NodePath("CharacterBody2D/Camera2D")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_Machine")]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_Machine", "soundfx")]
 collision_mask = 20
 script = ExtResource("2_owvpp")
 _Machine = NodePath("State_Machine")
 girlscene = ExtResource("3_xr8lj")
+soundfx = NodePath("pick_girl_soundfx")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 position = Vector2(14, -42)
-position_smoothing_enabled = true
 position_smoothing_speed = 8.0
 drag_left_margin = 0.01
 drag_top_margin = 0.01
@@ -881,6 +1065,7 @@ script = ExtResource("3_v7p16")
 [node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D/Camera2D"]
 
 [node name="TextureRect" type="TextureRect" parent="CharacterBody2D/Camera2D/CanvasLayer"]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("4_ppdlg")
@@ -922,7 +1107,6 @@ animation_player = NodePath("../../AnimationPlayer")
 body = NodePath("../..")
 
 [node name="Run_Sprite" type="Sprite2D" parent="CharacterBody2D/State_Machine/Run_State"]
-visible = false
 position = Vector2(0, -14)
 texture = ExtResource("5_4wf4l")
 flip_h = true
@@ -938,6 +1122,12 @@ position = Vector2(0, -15)
 texture = ExtResource("6_01a4e")
 hframes = 9
 
+[node name="pick_girl_soundfx2" type="AudioStreamPlayer2D" parent="CharacterBody2D/State_Machine/Walking_State"]
+position = Vector2(0, 2)
+stream = ExtResource("26_ui1ln")
+volume_db = -5.0
+pitch_scale = 1.34
+
 [node name="Jump_Standard_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("animation_player", "body")]
 script = ExtResource("12_r8fok")
 jump_height = 35.0
@@ -951,6 +1141,9 @@ visible = false
 position = Vector2(0, -16)
 texture = ExtResource("7_7a1se")
 hframes = 3
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D/State_Machine/Jump_Standard_State"]
+stream = ExtResource("16_01ng6")
 
 [node name="Jump_withgirl_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("animation_player", "body")]
 script = ExtResource("14_nhbkt")
@@ -966,10 +1159,11 @@ position = Vector2(0, -15)
 texture = ExtResource("8_x1y6q")
 hframes = 2
 
-[node name="Shoot_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("shot_spot", "animation_player", "body")]
+[node name="Shoot_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("shot_spot", "soundFX", "animation_player", "body")]
 script = ExtResource("16_vskfa")
 spiritual_shot_scene = ExtResource("17_pjcup")
 shot_spot = NodePath("shot_spot")
+soundFX = NodePath("AudioStreamPlayer2D")
 animation_player = NodePath("../../AnimationPlayer")
 body = NodePath("../..")
 
@@ -981,8 +1175,14 @@ hframes = 5
 [node name="shot_spot" type="Node2D" parent="CharacterBody2D/State_Machine/Shoot_State"]
 position = Vector2(20, -14)
 
-[node name="Death_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("animation_player", "body", "Camera")]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D/State_Machine/Shoot_State"]
+stream = ExtResource("21_avsg8")
+volume_db = 2.856
+pitch_scale = 0.75
+
+[node name="Death_State" type="Node2D" parent="CharacterBody2D/State_Machine" node_paths=PackedStringArray("soundFX", "animation_player", "body", "Camera")]
 script = ExtResource("19_ppdlg")
+soundFX = NodePath("AudioStreamPlayer2D")
 animation_player = NodePath("../../AnimationPlayer")
 body = NodePath("../..")
 Camera = NodePath("../../Camera2D")
@@ -992,8 +1192,17 @@ position = Vector2(-7, -13)
 texture = ExtResource("19_0poeq")
 hframes = 15
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D/State_Machine/Death_State"]
+stream = ExtResource("24_dv6dp")
+volume_db = 2.0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(0.5, -15)
 shape = SubResource("RectangleShape2D_mv1ah")
+
+[node name="pick_girl_soundfx" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+stream = ExtResource("26_ui1ln")
+volume_db = 2.0
+pitch_scale = 0.57
 
 [editable path="CharacterBody2D/Camera2D/crt_shader_structure"]

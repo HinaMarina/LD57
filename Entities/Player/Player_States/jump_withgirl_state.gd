@@ -8,7 +8,7 @@ extends State
 @onready var jump_gravity:float = (-1)*(-2*jump_height)/(peak_time*peak_time)
 @onready var fall_gravity:float = (-1)*(-2*jump_height)/(fall_time*fall_time)
 
-var coyote_time:float = 0.05
+var coyote_time:float = 0.1
 
 
 func get_gravity():

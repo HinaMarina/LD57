@@ -1,4 +1,4 @@
-extends Node2D
+extends nightmare
 var target:CharacterBody2D
 var speed:=100
 var can_fly:bool=false

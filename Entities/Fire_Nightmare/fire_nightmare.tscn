@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://l8jiqbe5alvr"]
+[gd_scene load_steps=13 format=3 uid="uid://l8jiqbe5alvr"]
 
 [ext_resource type="Script" uid="uid://bh5q3laplrx5y" path="res://Entities/Fire_Nightmare/FireNightmare_body.gd" id="1_5u6d0"]
 [ext_resource type="Script" uid="uid://bkfdilnpvos84" path="res://Entities/Fire_Nightmare/fire_nightmare.gd" id="1_lbq5l"]
 [ext_resource type="Texture2D" uid="uid://mbsab13vasfv" path="res://Entities/Fire_Nightmare/Fire_NightMare.png" id="1_x54pa"]
+[ext_resource type="AudioStream" uid="uid://barsjhtf0akm5" path="res://Sound/SoundFX/fire_shoot.wav" id="4_y12fl"]
+[ext_resource type="AudioStream" uid="uid://da58yo0x0w8cs" path="res://Sound/SoundFX/baum.wav" id="5_6dimd"]
 
 [sub_resource type="Animation" id="Animation_x54pa"]
 resource_name = "IDLE"
@@ -87,6 +89,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [SubResource("CapsuleShape2D_6dimd")]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("baum:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_lbq5l"]
 resource_name = "SHOOT"
@@ -139,6 +165,30 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(),
 "update": 1,
 "values": []
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("baum:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.551391, 0.600048),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y12fl"]
@@ -206,6 +256,15 @@ target_position = Vector2(-150, 0)
 [node name="RayCastright" type="RayCast2D" parent="."]
 scale = Vector2(-1, 1)
 target_position = Vector2(-150, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_y12fl")
+volume_db = -2.846
+max_distance = 150.0
+
+[node name="baum" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_6dimd")
+max_distance = 150.0
 
 [connection signal="animation_finished" from="CharacterBody2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="CharacterBody2D/Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://bdarpj6tqyuay"]
+
+[ext_resource type="Texture2D" uid="uid://c6783egxxkyxj" path="res://Miscellaneous/dialog_box_texture.png" id="1_ejtpy"]
+[ext_resource type="Script" uid="uid://8qoct2r3v0wq" path="res://Scenes/Introduction/dialog_box.gd" id="1_g5kxn"]
+[ext_resource type="FontFile" uid="uid://dfv7qweur2d7a" path="res://Miscellaneous/nokiafc22.ttf" id="2_36aq5"]
+
+[node name="Dialog_box" type="MarginContainer" node_paths=PackedStringArray("label", "letter_timer")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -24.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g5kxn")
+label = NodePath("MarginContainer/Label")
+letter_timer = NodePath("letter_timer")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_ejtpy")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_36aq5")
+vertical_alignment = 1
+
+[node name="letter_timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="letter_timer" to="." method="_on_letter_timer_timeout"]

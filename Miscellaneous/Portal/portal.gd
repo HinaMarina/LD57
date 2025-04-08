@@ -3,6 +3,7 @@ extends Node2D
 @export var mouth_anim:AnimatedSprite2D
 @export var target_scene:String
 @export var target_position:Vector2
+@export var soundFX:AudioStreamPlayer2D
 var body_captured:Player
 var teleport:=true
 var started:= false
@@ -25,6 +26,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
 	
 		if body._Machine.is_holding_girl:
+			soundFX.play()
 			started = true
 			body.velocity = Vector2.ZERO
 			body.global_position = self.global_position
