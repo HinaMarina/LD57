@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bncwtnhi8xce1"]
+[gd_scene load_steps=52 format=3 uid="uid://bncwtnhi8xce1"]
 
 [ext_resource type="Script" uid="uid://ipsikq7td4hd" path="res://Scenes/Introduction/initial_cutscene.gd" id="1_sw46e"]
 [ext_resource type="Texture2D" uid="uid://bk1fq2ibg5hlw" path="res://Scenes/Introduction/Black_BG.png" id="2_mi7fi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://jx3ncuxfewin" path="res://Scenes/Introduction/text/text3.png" id="7_rle1h"]
 [ext_resource type="Texture2D" uid="uid://bc7fmrxs2cx2f" path="res://Scenes/Introduction/text/cursor_icon.png" id="8_rle1h"]
 [ext_resource type="AudioStream" uid="uid://btujffumuic3j" path="res://Sound/Music/Title_song.wav" id="9_2jrs5"]
+[ext_resource type="PackedScene" uid="uid://buoaj3iht7eq3" path="res://Miscellaneous/Crt_shader_structure/crt_shader_structure.tscn" id="10_ltdh6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r3yja"]
 atlas = ExtResource("4_xaro7")
@@ -203,6 +204,34 @@ animations = [{
 [sub_resource type="Animation" id="Animation_ltdh6"]
 length = 0.001
 
+[sub_resource type="Animation" id="Animation_l7b0r"]
+resource_name = "fade_out"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackBg3:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BlackBg3:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="Animation" id="Animation_2jrs5"]
 resource_name = "text_1"
 length = 2.0
@@ -323,34 +352,6 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_l7b0r"]
-resource_name = "fade_out"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BlackBg3:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("BlackBg3:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
 [sub_resource type="Animation" id="Animation_6r35c"]
 resource_name = "wait"
 length = 3.0
@@ -421,7 +422,7 @@ animationPlayer = NodePath("AnimationPlayer")
 next_scene_path = "res://Scenes/Introduction/first_scene.tscn"
 
 [node name="BlackBg" type="Sprite2D" parent="."]
-position = Vector2(160, 90)
+position = Vector2(120, 90)
 texture = ExtResource("2_mi7fi")
 
 [node name="BlackBg2" type="Sprite2D" parent="."]
@@ -430,10 +431,10 @@ position = Vector2(160, 90)
 texture = ExtResource("3_vigh8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(163, 121)
+position = Vector2(125, 122)
 sprite_frames = SubResource("SpriteFrames_u8kys")
 autoplay = "default"
-frame_progress = 0.717129
+frame_progress = 0.135831
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -441,28 +442,27 @@ libraries = {
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
-position = Vector2(163, 59)
+position = Vector2(122, 47)
 texture = ExtResource("5_vigh8")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(163, 59)
+position = Vector2(122, 47)
 texture = ExtResource("6_r3yja")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0)
-position = Vector2(163, 59)
+position = Vector2(122, 47)
 texture = ExtResource("7_rle1h")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(230, 80)
+position = Vector2(192, 68)
 sprite_frames = SubResource("SpriteFrames_67tdp")
 autoplay = "default"
-frame_progress = 0.765747
+frame_progress = 0.184446
 
 [node name="BlackBg3" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -472,5 +472,10 @@ texture = ExtResource("2_mi7fi")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_2jrs5")
 autoplay = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(120, 90)
+
+[node name="crt_shader_structure" parent="Camera2D" instance=ExtResource("10_ltdh6")]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

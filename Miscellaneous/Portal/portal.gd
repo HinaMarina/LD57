@@ -14,6 +14,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if mouth_anim.is_playing():
 			body_captured.visible = false
+			#PlayerDeathManager.is_teleporting.emit(true)
 	
 	if mouth_anim.frame == 6 && teleport:
 		PlayerDeathManager.change_scene(target_position,target_scene,body_captured.get_parent())
@@ -26,6 +27,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
 	
 		if body._Machine.is_holding_girl:
+			PlayerDeathManager.is_teleporting.emit(true)
 			soundFX.play()
 			started = true
 			body.velocity = Vector2.ZERO

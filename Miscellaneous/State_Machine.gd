@@ -12,12 +12,15 @@ class_name State_Machine extends State
 @export var shot_spot:Node2D
 var can_shoot:=true
 
+
 func _ready() -> void:
 	super()
 	set_state(Idle_State)
-
+	PlayerDeathManager.is_teleporting.connect(teleporting_change)
 
 func _process(delta: float) -> void:
+	if is_teleporting:
+		return
 	grounded = body.is_on_floor()
 	if is_instance_valid(current_state):
 		current_state.do()
@@ -28,6 +31,8 @@ func _process(delta: float) -> void:
 
 	
 func _physics_process(delta: float) -> void:
+	if is_teleporting:
+		return
 	if !grounded && can_player_move:
 		if is_holding_girl:
 			set_state(Jump_withgirl_State)
@@ -75,3 +80,6 @@ func _input(event: InputEvent) -> void:
 func take_damage():
 	set_state(Death_State)
 	current_state.do()
+
+func teleporting_change(value:bool):
+	is_teleporting = value

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=4 uid="uid://ciujm83bdubet"]
+[gd_scene load_steps=50 format=4 uid="uid://ciujm83bdubet"]
 
 [ext_resource type="Script" uid="uid://chrku8o2krsb3" path="res://Miscellaneous/Stage_level_class.gd" id="1_6n13t"]
 [ext_resource type="Texture2D" uid="uid://blln8st5d2564" path="res://Scenes/Cave/Visuals/Basic_Cave_Tileset.png" id="2_1dav5"]
@@ -25,12 +25,21 @@ texture = ExtResource("2_1dav5")
 [sub_resource type="TileSet" id="TileSet_unqim"]
 sources/0 = SubResource("TileSetAtlasSource_3t75a")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1dav5"]
-size = Vector2(192, 64)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rq64r"]
+size = Vector2(192, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xvtuq"]
+size = Vector2(640, 96)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_1dav5"]
 a = Vector2(0, 1)
 b = Vector2(480, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06dje"]
+size = Vector2(80, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnbdb"]
+size = Vector2(224, 720)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_3t75a"]
 a = Vector2(320, 1)
@@ -47,6 +56,9 @@ b = Vector2(480, 1)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_upohj"]
 a = Vector2(352, 1)
 b = Vector2(416, 1)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_tnbdb"]
+b = Vector2(32, 0)
 
 [sub_resource type="Curve2D" id="Curve2D_m4jbd"]
 _data = {
@@ -274,10 +286,10 @@ _data = {
 
 [node name="CaveScreen3" type="Node2D" node_paths=PackedStringArray("camera_limit_diagonal_right", "camera_limit_diagonal_left")]
 script = ExtResource("1_6n13t")
-player_initial_spot = Vector2(336, -32)
+player_initial_spot = Vector2(372, -40)
 camera_limit_diagonal_right = NodePath("diagonal_right")
 camera_limit_diagonal_left = NodePath("diagonal_left")
-next_scene = "q"
+next_scene = "res://Scenes/Final/final.tscn"
 metadata/_custom_type_script = "uid://chrku8o2krsb3"
 
 [node name="Start_point" type="Node2D" parent="."]
@@ -314,13 +326,25 @@ collision_layer = 16
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(416, 32)
-shape = SubResource("RectangleShape2D_1dav5")
+position = Vector2(416, 48)
+shape = SubResource("RectangleShape2D_rq64r")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(320, 144)
+shape = SubResource("RectangleShape2D_xvtuq")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, -80)
 shape = SubResource("SegmentShape2D_1dav5")
 one_way_collision = true
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-40, -240)
+shape = SubResource("RectangleShape2D_06dje")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(752, -216)
+shape = SubResource("RectangleShape2D_tnbdb")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(160, -32)
@@ -361,8 +385,13 @@ position = Vector2(376, -8)
 scene_path = "res://Scenes/Cave/Cave_Screens/cave_screen3.tscn"
 
 [node name="Saving_spot2" parent="StaticBody2D" instance=ExtResource("3_nkyjf")]
-position = Vector2(312, -8)
+position = Vector2(328, -8)
 scene_path = "res://Scenes/Cave/Cave_Screens/cave_screen3.tscn"
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(280, -248)
+shape = SubResource("SegmentShape2D_tnbdb")
+one_way_collision = true
 
 [node name="stalactites" type="Node2D" parent="."]
 position = Vector2(0, -16)
@@ -814,7 +843,7 @@ libraries = {
 }
 
 [node name="Portal" parent="Node2D3/Node2D" instance=ExtResource("7_m4jbd")]
-position = Vector2(-296, -48)
+position = Vector2(-296, -40)
 target_scene = "res://Scenes/Final/final.tscn"
 target_position = Vector2(32, -20)
 

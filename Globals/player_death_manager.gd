@@ -18,6 +18,7 @@ var point_to_go:Vector2
 var player_to_transit:player_node
 
 signal player_is_dead
+signal is_teleporting(value:bool)
 
 
 
@@ -62,10 +63,10 @@ func player_died():
 	set_player_camera(player,current_scene,false)
 		
 	animator.play("fade_out")
-	await animator.animation_finished
+	#await animator.animation_finished
 
 func instantiate_player():
-		
+
 		var current_scene = get_tree().get_current_scene() as stage_level
 		var player = player_packed_scene.instantiate() as player_node
 		var girl = girl_scene.instantiate()
@@ -77,10 +78,11 @@ func instantiate_player():
 		set_player_camera(player,current_scene,false)
 		
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_released("instantiate_player"):
+	if Input.is_action_just_pressed("instantiate_player"):
 		instantiate_player()
 		
 func change_scene(target_position:Vector2,target_scene:String,player:player_node):
+
 	player.call_deferred('reparent',self)
 	scene_to_transit = target_scene
 	point_to_go = target_position
@@ -90,7 +92,6 @@ func change_scene(target_position:Vector2,target_scene:String,player:player_node
 
 
 func transit_to():
-
 	var scene = load(scene_to_transit)
 	get_tree().call_deferred("change_scene_to_packed", scene)
 	await Engine.get_main_loop().process_frame
@@ -103,7 +104,8 @@ func transit_to():
 	
 	
 	
-func set_player_camera(player:player_node,current_scene:stage_level,is_portal:bool):		
+func set_player_camera(player:player_node,current_scene:stage_level,is_portal:bool):
+		
 	if current_scene.camera_limit_diagonal_left == null || current_scene.camera_limit_diagonal_right == null:
 		return
 	player.Camera.limit_bottom = current_scene.camera_limit_diagonal_left.global_position.y
@@ -116,7 +118,6 @@ func set_player_camera(player:player_node,current_scene:stage_level,is_portal:bo
 		player.body._Machine.can_player_move = false
 		spill_sprite.global_position = player.body.global_position + Vector2(0,-25)
 		spill_animator.play_backwards("Spill")
-		print('oi')
 
 		await spill_animator.animation_finished
 	
@@ -124,6 +125,7 @@ func set_player_camera(player:player_node,current_scene:stage_level,is_portal:bo
 		player.body.visible = true
 	if is_instance_valid(player):
 		player.body._Machine.can_player_move = true
+	is_teleporting.emit(false)
 
 
 #func spill_player():

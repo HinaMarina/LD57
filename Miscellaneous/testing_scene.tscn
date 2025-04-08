@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8aqi4pkos1pp"]
+[gd_scene load_steps=10 format=3 uid="uid://b8aqi4pkos1pp"]
 
 [ext_resource type="Texture2D" uid="uid://crijlj0bcsvg8" path="res://icon.svg" id="1_cac6c"]
 [ext_resource type="Script" uid="uid://chrku8o2krsb3" path="res://Miscellaneous/Stage_level_class.gd" id="1_q76oh"]
 [ext_resource type="Script" uid="uid://gjpo8skln1qr" path="res://Miscellaneous/damage_test.gd" id="4_2o1wn"]
 [ext_resource type="PackedScene" uid="uid://djnjao1us4uke" path="res://Miscellaneous/Portal/Portal.tscn" id="5_q76oh"]
 [ext_resource type="PackedScene" uid="uid://bwg46pf007h7p" path="res://Miscellaneous/Saving_spot/Saving_spot.tscn" id="5_yo2ia"]
+[ext_resource type="PackedScene" uid="uid://bsoefkhx81bfe" path="res://Entities/Player/player.tscn" id="6_eosht"]
+[ext_resource type="PackedScene" uid="uid://cmvb6cmxwpt6k" path="res://Entities/Player/girl.tscn" id="7_denc4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ow0ie"]
 size = Vector2(138.7, 128)
@@ -54,6 +56,12 @@ shape = SubResource("RectangleShape2D_2o1wn")
 position = Vector2(10, 166)
 target_scene = "res://Scenes/Cave/Cave_Screens/cave_screen1.tscn"
 target_position = Vector2(32, -32)
+
+[node name="Player" parent="." instance=ExtResource("6_eosht")]
+position = Vector2(69, 171)
+
+[node name="Girl" parent="." instance=ExtResource("7_denc4")]
+position = Vector2(36, 183)
 
 [connection signal="body_entered" from="Icon2/Area2D" to="Icon2" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="this_door" to="." method="_on_this_door_body_entered"]

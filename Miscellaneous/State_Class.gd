@@ -6,7 +6,12 @@ class_name State extends Node2D
 @export var body:CharacterBody2D
 @export var player_gaze:RayCast2D
 @export var Camera:Camera2D
-
+var is_teleporting:bool:
+	set(new_value):
+		if new_value != is_teleporting:
+			is_teleporting = new_value
+			for child in all_children_states:
+				child.is_teleporting = new_value
 
 @onready var state_sprite:Sprite2D
 
@@ -91,6 +96,8 @@ func complete():
 
 
 func do():
+	if is_teleporting:
+		return
 	if current_state != null and current_state.is_complete == false:
 		current_state.do()
 	
@@ -106,6 +113,8 @@ func do():
 	
 	
 func physics_do(delta):
+	if is_teleporting:
+		return
 	if current_state!= null and current_state.is_complete == false:
 		current_state.physics_do(delta)
 	

@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bonojtt0j1hi2" path="res://Entities/Brown_Nightmare/new_brown_Nightmare/new_brown_nightmare_body.gd" id="2_86vug"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_86vug"]
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qlpb2"]
 
@@ -169,15 +170,16 @@ texture = ExtResource("1_elevh")
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
-position = Vector2(0, -8)
+position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_86vug")
 
 [node name="Hitbox" type="Area2D" parent="AnimatableBody2D"]
+position = Vector2(-1, -1)
 collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="AnimatableBody2D/Hitbox"]
-position = Vector2(0, -8)
+position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_qlpb2")
 
 [node name="SpriteAnimator" type="AnimationPlayer" parent="."]

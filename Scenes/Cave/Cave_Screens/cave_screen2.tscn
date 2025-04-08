@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=4 uid="uid://dslwksfd2mwoh"]
+[gd_scene load_steps=71 format=4 uid="uid://dslwksfd2mwoh"]
 
 [ext_resource type="Script" uid="uid://chrku8o2krsb3" path="res://Miscellaneous/Stage_level_class.gd" id="1_omthr"]
 [ext_resource type="Texture2D" uid="uid://blln8st5d2564" path="res://Scenes/Cave/Visuals/Basic_Cave_Tileset.png" id="2_n0ptj"]
@@ -168,7 +168,20 @@ b = Vector2(40, 1)
 a = Vector2(0, 280)
 b = Vector2(0, -280)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_agfp5"]
+size = Vector2(324, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2bbg8"]
+size = Vector2(482, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eavvv"]
+size = Vector2(112.5, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8lqy"]
+size = Vector2(48.25, 160)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_86vug"]
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qlpb2"]
 
@@ -318,6 +331,7 @@ _data = {
 point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_188ap"]
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ssm2r"]
 
@@ -461,6 +475,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v7416"]
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_glf8j"]
 
@@ -797,6 +812,26 @@ one_way_collision = true
 position = Vector2(640, -280)
 shape = SubResource("SegmentShape2D_agfp5")
 
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(804, -200)
+shape = SubResource("RectangleShape2D_agfp5")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-162, -200)
+shape = SubResource("RectangleShape2D_agfp5")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(239, 128)
+shape = SubResource("RectangleShape2D_2bbg8")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(583.75, 128)
+shape = SubResource("RectangleShape2D_eavvv")
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(504, 176)
+shape = SubResource("RectangleShape2D_d8lqy")
+
 [node name="CollisionShape2D10" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, -280)
 shape = SubResource("SegmentShape2D_agfp5")
@@ -824,7 +859,7 @@ texture = ExtResource("8_188ap")
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NewBrownNightmare/AnimatableBody2D"]
-position = Vector2(0, -8)
+position = Vector2(-1, -7)
 shape = SubResource("CircleShape2D_86vug")
 
 [node name="Hitbox" type="Area2D" parent="NewBrownNightmare/AnimatableBody2D"]
@@ -832,7 +867,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="NewBrownNightmare/AnimatableBody2D/Hitbox"]
-position = Vector2(0, -8)
+position = Vector2(-1, -7)
 shape = SubResource("CircleShape2D_qlpb2")
 
 [node name="SpriteAnimator" type="AnimationPlayer" parent="NewBrownNightmare"]
@@ -935,7 +970,7 @@ texture = ExtResource("8_188ap")
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NewBrownNightmare4/AnimatableBody2D"]
-position = Vector2(0, -8)
+position = Vector2(-1, -7)
 shape = SubResource("CircleShape2D_188ap")
 
 [node name="Hitbox" type="Area2D" parent="NewBrownNightmare4/AnimatableBody2D"]
@@ -943,7 +978,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="NewBrownNightmare4/AnimatableBody2D/Hitbox"]
-position = Vector2(0, -8)
+position = Vector2(-1, -7)
 shape = SubResource("CircleShape2D_ssm2r")
 
 [node name="SpriteAnimator" type="AnimationPlayer" parent="NewBrownNightmare4"]
@@ -990,7 +1025,7 @@ texture = ExtResource("8_188ap")
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NewBrownNightmare3/AnimatableBody2D"]
-position = Vector2(0, -8)
+position = Vector2(-1, -7)
 shape = SubResource("CircleShape2D_v7416")
 
 [node name="Hitbox" type="Area2D" parent="NewBrownNightmare3/AnimatableBody2D"]
@@ -998,7 +1033,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="NewBrownNightmare3/AnimatableBody2D/Hitbox"]
-position = Vector2(0, -8)
+position = Vector2(-1, -7)
 shape = SubResource("CircleShape2D_glf8j")
 
 [node name="SpriteAnimator" type="AnimationPlayer" parent="NewBrownNightmare3"]

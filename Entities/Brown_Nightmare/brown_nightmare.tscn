@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://cth0ichxdo0xi"]
+[gd_scene load_steps=12 format=3 uid="uid://cth0ichxdo0xi"]
 
 [ext_resource type="Script" uid="uid://q6j60qvi7hdt" path="res://Entities/Brown_Nightmare/brown_nightmare.gd" id="1_3h056"]
 [ext_resource type="Texture2D" uid="uid://dkqf6rg6lvu0q" path="res://Entities/Brown_Nightmare/Brown_Nightmare.png" id="1_a7jhl"]
 [ext_resource type="Script" uid="uid://d2y3or8txgco1" path="res://Entities/Brown_Nightmare/Brown_Nightmare_body.gd" id="2_ewg4e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a7jhl"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ewg4e"]
 
 [sub_resource type="Animation" id="Animation_arelx"]
 resource_name = "IDLE_E"
@@ -170,7 +173,7 @@ timer = NodePath("Timer")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 8
 script = ExtResource("2_ewg4e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
@@ -188,7 +191,7 @@ collision_mask = 3
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="CharacterBody2D/Area2D"]
 position = Vector2(0, -8)
-shape = SubResource("CircleShape2D_a7jhl")
+shape = SubResource("CircleShape2D_ewg4e")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
