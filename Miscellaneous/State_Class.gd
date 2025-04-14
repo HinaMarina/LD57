@@ -95,11 +95,11 @@ func complete():
 	is_complete = true
 
 
-func do():
+func do(delta:float):
 	if is_teleporting:
 		return
 	if current_state != null and current_state.is_complete == false:
-		current_state.do()
+		current_state.do(delta)
 	
 	#var animation_machine = animation_tree.get("parameters/playback") as AnimationNodeStateMachinePlayback
 	#var nodestate_machine = animation_tree.tree_root.get_node(animation_machine.get_current_node())

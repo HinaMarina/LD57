@@ -14,9 +14,9 @@ func shoot():
 	var parent = body.get_parent().get_parent()
 	parent.add_child(spiritual_shot)
 	spiritual_shot.global_position = shot_spot.global_position
-	spiritual_shot.shoot(input_vector)
+	spiritual_shot.shoot(Vector2(input_vector.x,0))
 
-func do():
+func do(delta):
 	if input_vector.x>=0:
 		animation_player.play("Spiritual_Shot_E")
 	else:

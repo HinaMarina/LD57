@@ -3,8 +3,8 @@ extends State
 var max_speed :int = 150
 var acceleration:int = 95
 
-func do():
-	super()
+func do(delta):
+	super(delta)
 	animation_direction_calculator()
 	
 func physics_do(delta):

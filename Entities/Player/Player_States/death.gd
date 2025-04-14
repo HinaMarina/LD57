@@ -6,7 +6,7 @@ func _ready() -> void:
 	super()
 	animation_player.animation_finished.connect(on_animation_finished)
 
-func do():
+func do(delta):
 	die()
 	
 func die():

@@ -13,6 +13,8 @@ extends Node2D
 @export var spill_sprite:Sprite2D
 @export var spill_animator:AnimationPlayer
 
+var player_is_already_dead:bool=false
+
 var scene_to_transit:String
 var point_to_go:Vector2
 var player_to_transit:player_node
@@ -33,6 +35,9 @@ func save_player_camera(camera:Camera2D):
 	playerCamera = camera
 	
 func player_died():
+	if player_is_already_dead:
+		return
+	player_is_already_dead = true
 	if last_scene_saved == null:
 		instantiate_player()
 		return
@@ -77,10 +82,10 @@ func instantiate_player():
 
 		set_player_camera(player,current_scene,false)
 		
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("instantiate_player"):
-		instantiate_player()
-		
+#func _input(event: InputEvent) -> void:
+	#if Input.is_action_just_pressed("instantiate_player"):
+		#instantiate_player()
+		#
 func change_scene(target_position:Vector2,target_scene:String,player:player_node):
 
 	player.call_deferred('reparent',self)
@@ -126,7 +131,7 @@ func set_player_camera(player:player_node,current_scene:stage_level,is_portal:bo
 	if is_instance_valid(player):
 		player.body._Machine.can_player_move = true
 	is_teleporting.emit(false)
-
+	player_is_already_dead = false
 
 #func spill_player():
 	#player_to_transit.body.visible = true

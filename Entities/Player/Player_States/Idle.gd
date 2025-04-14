@@ -8,8 +8,8 @@ func set_input_vector(new_value:Vector2):
 func _ready():
 	super()
 		
-func do():
-	super()
+func do(delta):
+	super(delta)
 	animation_direction_calculator()
 
 		

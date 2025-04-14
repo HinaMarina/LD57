@@ -7,36 +7,49 @@ extends State
 @onready var jump_velocity:float =(-1)*(2*jump_height)/peak_time
 @onready var jump_gravity:float = (-1)*(-2*jump_height)/(peak_time*peak_time)
 @onready var fall_gravity:float = (-1)*(-2*jump_height)/(fall_time*fall_time)
+@export var jumpFX:AudioStreamPlayer2D
+var coyote_time:float = 0.13
+var jump_sounded:= false
 
-var coyote_time:float = 0.1
+var already_jumped:bool = false
 
+func enter():
+	super()
+	jump_sounded = false
+	already_jumped = false
+	jump()
 
+	
 func get_gravity():
-	return jump_gravity if body.velocity.y<0 else fall_gravity
+	return jump_gravity if body.velocity.y<=0 else fall_gravity
 	
 func jump():
 	body.velocity.y = jump_velocity
+	already_jumped = true
 
-func do():
-	if lambda_time() <= coyote_time && Input.is_action_just_pressed("Jump"):
-		jump()
-	super()
+func do(delta):
+	super(delta)
 	play_animation()
 	
+
+
 func physics_do(delta):
 	body.velocity.y += get_gravity()*delta
 	body.velocity.x = Input.get_axis("ui_left","ui_right")*90
-	if grounded:
-		jump()
 	body.move_and_slide()
+	
 
 func play_animation():
 	if get_gravity() == jump_gravity:
+		if jump_sounded == false:
+			jumpFX.play()
+			jump_sounded = true
 		if input_vector.x>=0:
 			animation_player.play("Jump_withgirl_UP_E")
 		else:
 			animation_player.play("Jump_withgirl_UP_W")
 	if get_gravity() == fall_gravity:
+
 		if input_vector.x>=0:
 			animation_player.play("Jump_withgirl_DOWN_E")
 			
